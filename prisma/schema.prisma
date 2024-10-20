@@ -1,0 +1,116 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                Int        @id @default(autoincrement()) // Unique identifier for the user
+  email             String?    @unique // Email is optional and unique for users with an account
+  name              String     // User's full name
+  password          String?    // Optional password for users with accounts
+  balance           Float      @default(0.0) // Current balance of the user
+  role              Role       @default(USER) // Defines the user's role (USER, ADMIN, or AGENT)
+  isActive          Boolean    @default(true) // Indicates whether the user account is active
+  transfersSent     Transfer[] @relation("SentTransfers") // Transfers sent by the user
+  transfersReceived Transfer[] @relation("ReceivedTransfers") // Transfers received by the user
+  transactions      Transaction[] // Transactions related to the user
+  agent             Agent?     // One-to-one relationship if the user is an agent
+  admin             Admin?     // One-to-one relationship if the user is an admin
+  notifications     Notification[] // Notifications for the user
+  createdAt         DateTime   @default(now()) // When the user account was created
+  updatedAt         DateTime   @updatedAt // Automatically updated when the user record is modified
+}
+
+model Transfer {
+  id                Int        @id @default(autoincrement()) // Unique identifier for the transfer
+  amount            Float      // Amount being transferred
+  senderId          Int        // Reference to the sender of the transfer (User)
+  receiverId        Int?       // Can be null if the receiver is not a user of the app
+  agentId           Int?       // Optional reference to the agent handling the transfer
+  feeId             Int?       @unique  // Optional link to a fee model if applicable
+  code              String?    // Withdrawal code generated for non-app receivers
+  transaction       Transaction?
+  createdAt         DateTime   @default(now()) // When the transfer was initiated
+  expiresAt         DateTime?  // Expiration date of the withdrawal code if unused
+  sender            User       @relation("SentTransfers", fields: [senderId], references: [id]) // Sender relationship
+  receiver          User?      @relation("ReceivedTransfers", fields: [receiverId], references: [id]) // Receiver relationship
+  agent             Agent?     @relation(fields: [agentId], references: [id]) // Agent relationship
+  fee               Fee?       @relation(fields: [feeId], references: [id]) // Fee relationship
+  status            TransferStatus @default(PENDING) // Current status of the transfer
+  isNonUser         Boolean    @default(false) // Indicates if the transfer is for a non-user
+}
+
+model Transaction {
+  id          Int       @id @default(autoincrement()) // Unique identifier for the transaction
+  amount      Float     // Transaction amount
+  userId      Int       // Reference to the user involved in the transaction
+  type        TransactionType // Type of transaction (DEPOSIT, WITHDRAWAL, or TRANSFER)
+  transferId  Int?      @unique // Optional link to a transfer if relevant
+  feeId       Int?      @unique  // Optional link to a fee if applicable
+  createdAt   DateTime  @default(now()) // When the transaction occurred
+  user        User      @relation(fields: [userId], references: [id]) // User relationship
+  transfer    Transfer? @relation(fields: [transferId], references: [id]) // Transfer relationship
+  fee         Fee?      @relation(fields: [feeId], references: [id]) // Fee relationship
+  description String    // Description of the transaction
+}
+
+model Admin {
+  id          Int      @id @default(autoincrement()) // Unique identifier for the admin
+  userId      Int      @unique // Reference to the user (who is an admin)
+  user        User     @relation(fields: [userId], references: [id]) // User relationship
+  createdAt   DateTime @default(now()) // When the admin account was created
+}
+
+model Agent {
+  id          Int      @id @default(autoincrement()) // Unique identifier for the agent
+  userId      Int      @unique // Reference to the user (who is an agent)
+  user        User     @relation(fields: [userId], references: [id]) // User relationship
+  transfers   Transfer[] // Transfers handled by the agent
+  createdAt   DateTime @default(now()) // When the agent account was created
+}
+
+model Notification {
+  id          Int      @id @default(autoincrement()) // Unique identifier for the notification
+  userId      Int      // Reference to the user receiving the notification
+  message     String   // Notification message content
+  isRead      Boolean  @default(false) // Indicates if the notification has been read
+  createdAt   DateTime @default(now()) // When the notification was created
+  user        User     @relation(fields: [userId], references: [id]) // User relationship
+}
+
+model Fee {
+  id          Int      @id @default(autoincrement()) // Unique identifier for the fee record
+  amount      Float    // Fee amount
+  description String   // Description of the fee
+  transaction Transaction? // Optional link to the associated transaction
+  transfer    Transfer? // Optional link to the associated transfer
+}
+
+enum Role {
+  USER      // Standard user of the application
+  ADMIN     // Administrative user with elevated permissions
+  AGENT     // Agent responsible for handling transfers
+}
+
+enum TransferStatus {
+  PENDING    // Transfer is awaiting processing
+  COMPLETED  // Transfer has been successfully completed
+  CANCELLED  // Transfer was cancelled
+  EXPIRED    // New status if the withdrawal code expired before use
+}
+
+enum TransactionType {
+  DEPOSIT    // Money added to the user's account
+  WITHDRAWAL // Money withdrawn from the user's account
+  TRANSFER   // Money transferred between users or to non-users
+}
