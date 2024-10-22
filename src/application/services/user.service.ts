@@ -10,11 +10,11 @@ export class UserService {
     }
 
     async getAllUsers(): Promise<User[]> {
-        return this.userRepository.readAll();
+        return this.userRepository.getAll();
     }
 
     async getUserById(id: number): Promise<User | null> {
-        return this.userRepository.readById(id);
+        return this.userRepository.getById(id);
     }
 
     async updateUser(id: number, user: Partial<User>): Promise<User | null> {

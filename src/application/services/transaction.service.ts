@@ -11,11 +11,11 @@ export class TransactionService {
     }
 
     async getAllTransactions(): Promise<Transaction[]> {
-        return this.transactionRepository.readAll();
+        return this.transactionRepository.getAll();
     }
 
     async getTransactionById(id: number): Promise<Transaction | null> {
-        return this.transactionRepository.readById(id);
+        return this.transactionRepository.getById(id);
     }
 
     async updateTransaction(id: number, transaction: Partial<Transaction>): Promise<Transaction | null> {

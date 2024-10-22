@@ -16,22 +16,22 @@ export class TransferRepositoryImpl implements ITransferRepository {
     }
   }
 
-  async readAll(): Promise<Transfer[]> {
+  async getAll(): Promise<Transfer[]> {
     try {
       const result = await prisma.transfer.findMany();
       return result.map(toTransferEntity);
     } catch (error) {
-      console.error('Error reading all transfers:', error);
+      console.error('Error getting all transfers:', error);
       throw error;
     }
   }
 
-  async readById(id: number): Promise<Transfer | null> {
+  async getById(id: number): Promise<Transfer | null> {
     try {
       const result = await prisma.transfer.findUnique({ where: { id } });
       return toTransferEntity(result);
     } catch (error) {
-      console.error('Error reading transfer by ID:', error);
+      console.error('Error getting transfer by ID:', error);
       throw error;
     }
   }

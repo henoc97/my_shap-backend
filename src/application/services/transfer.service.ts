@@ -11,11 +11,11 @@ export class TransferService {
     }
 
     async getAllTransfers(): Promise<Transfer[]> {
-        return this.transferRepository.readAll();
+        return this.transferRepository.getAll();
     }
 
     async getTransferById(id: number): Promise<Transfer | null> {
-        return this.transferRepository.readById(id);
+        return this.transferRepository.getById(id);
     }
 
     async updateTransfer(id: number, transfer: Partial<Transfer>): Promise<Transfer | null> {
