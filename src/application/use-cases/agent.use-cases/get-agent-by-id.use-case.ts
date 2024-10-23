@@ -1,5 +1,7 @@
 import { AgentService } from "../../services/agent.service";
+import { injectable } from "inversify";
 
+@injectable()
 export class GetAgentByIdUseCase {
     constructor(private agentService: AgentService) {}
 

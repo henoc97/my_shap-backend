@@ -5,7 +5,9 @@ import { GetAllUsersUseCase } from '../../application/use-cases/user.use-cases/g
 import { GetUserByIdUseCase } from '../../application/use-cases/user.use-cases/get-user-by-id.use-case';
 import { UpdateUserUseCase } from '../../application/use-cases/user.use-cases/update-user.use-case';
 import { DeleteUserUseCase } from '../../application/use-cases/user.use-cases/delete-user.use-case';
+import { injectable } from 'inversify';
 
+@injectable()
 export class UserController {
     constructor(
         private createUserUseCase: CreateUserUseCase,

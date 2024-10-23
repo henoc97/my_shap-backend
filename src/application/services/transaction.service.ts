@@ -1,8 +1,9 @@
+import { injectable } from "inversify";
 import { Transaction } from "../../domain/entities/transaction.entity";
 import { TransactionType } from "../../domain/enums/transaction-type.enum";
 import { ITransactionRepository } from "../../domain/repositories/transaction.repository";
 
-
+@injectable()
 export class TransactionService {
     constructor(private transactionRepository: ITransactionRepository) {}
 

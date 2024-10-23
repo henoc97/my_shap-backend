@@ -1,6 +1,8 @@
 import { TransferService } from "../../services/transfer.service";
 import { TransferStatus } from "../../../domain/enums/transfert-status.enum";
+import { injectable } from "inversify";
 
+@injectable()
 export class FindTransfersByStatusUseCase {
     constructor(private transferService: TransferService) {}
 

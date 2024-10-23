@@ -1,5 +1,7 @@
+import { injectable } from "inversify";
 import { AdminService } from "../../services/admin.service";
 
+@injectable()
 export class GetAdminByIdUseCase {
     constructor(private adminService: AdminService) {}
 

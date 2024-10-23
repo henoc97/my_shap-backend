@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
 import { CreateNotificationUseCase } from '../../application/use-cases/notification.use-cases/create-notification.use-case';
 import { GetAllNotificationsUseCase } from '../../application/use-cases/notification.use-cases/get-all-notifications.use-case';
+import { injectable } from 'inversify';
 
+@injectable()
 export class NotificationController {
     constructor(
         private createNotificationUseCase: CreateNotificationUseCase,

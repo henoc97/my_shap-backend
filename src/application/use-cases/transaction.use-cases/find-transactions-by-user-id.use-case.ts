@@ -1,5 +1,7 @@
 import { TransactionService } from "../../services/transaction.service";
+import { injectable } from "inversify";
 
+@injectable()
 export class FindTransactionsByUserIdUseCase {
     constructor(private transactionService: TransactionService) {}
 

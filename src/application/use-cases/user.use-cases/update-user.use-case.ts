@@ -1,6 +1,8 @@
 import { UserService } from "../../services/user.service";
 import { User } from "../../../domain/entities/user.entity";
+import { injectable } from "inversify";
 
+@injectable()
 export class UpdateUserUseCase {
     constructor(private userService: UserService) {}
 

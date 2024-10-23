@@ -1,5 +1,7 @@
+import { injectable } from "inversify";
 import { TransferService } from "../../services/transfer.service";
 
+@injectable()
 export class FindTransfersByReceiverIdUseCase {
     constructor(private transferService: TransferService) {}
 

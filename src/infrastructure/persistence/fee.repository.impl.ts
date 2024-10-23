@@ -2,7 +2,9 @@ import { IFeeRepository } from '../../domain/repositories/fee.repository';
 import { Fee } from '../../domain/entities/fee.entity';
 import prisma from '../../prisma/prisma.service';
 import { toFeeEntity } from '../../application/helper/prisma.to.entity/fee.to.entity';
+import { injectable } from 'inversify';
 
+@injectable()
 export class FeeRepositoryImpl implements IFeeRepository {
   async create(fee: Fee): Promise<Fee> {
     try {

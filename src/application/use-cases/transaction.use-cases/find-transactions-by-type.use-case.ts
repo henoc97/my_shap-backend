@@ -1,6 +1,8 @@
 import { TransactionService } from "../../services/transaction.service";
 import { TransactionType } from "../../../domain/enums/transaction-type.enum";
+import { injectable } from "inversify";
 
+@injectable()
 export class FindTransactionsByTypeUseCase {
     constructor(private transactionService: TransactionService) {}
 

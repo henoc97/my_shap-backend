@@ -6,7 +6,9 @@ import { FindAgentsWithTransfersUseCase } from '../../application/use-cases/agen
 import { GetAllAgentsUseCase } from '../../application/use-cases/agent.use-cases/get-all-agents.use-case';
 import { GetAgentByIdUseCase } from '../../application/use-cases/agent.use-cases/get-agent-by-id.use-case';
 import { UpdateAgentUseCase } from '../../application/use-cases/agent.use-cases/update-agent.use-case';
+import { injectable } from 'inversify';
 
+@injectable()
 export class AgentController {
     constructor(
         private createAgentUseCase: CreateAgentUseCase,

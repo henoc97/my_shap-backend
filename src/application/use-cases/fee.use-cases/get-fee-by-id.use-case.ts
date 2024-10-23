@@ -1,5 +1,7 @@
 import { FeeService } from "../../services/fee.service";
+import { injectable } from "inversify";
 
+@injectable()
 export class GetFeeByIdUseCase {
     constructor(private feeService: FeeService) {}
 

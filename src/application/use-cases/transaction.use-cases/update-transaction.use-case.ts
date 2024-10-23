@@ -1,6 +1,8 @@
 import { TransactionService } from "../../services/transaction.service";
 import { Transaction } from "../../../domain/entities/transaction.entity";
+import { injectable } from "inversify";
 
+@injectable()
 export class UpdateTransactionUseCase {
     constructor(private transactionService: TransactionService) {}
 

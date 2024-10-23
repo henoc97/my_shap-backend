@@ -1,5 +1,7 @@
 import { UserService } from "../../services/user.service";
+import { injectable } from "inversify";
 
+@injectable()
 export class FindActiveUsersUseCase {
     constructor(private userService: UserService) {}
 

@@ -1,8 +1,9 @@
+import { injectable } from "inversify";
 import { AgentDTO } from "../../../presentation/dtos/agent.dto";
 import { toAgentEntity } from "../../helper/to.entity/agent.to.entity";
 import { AgentService } from "../../services/agent.service";
 
-
+@injectable()
 export class CreateAgentUseCase {
     constructor(private agentService: AgentService) {}
 

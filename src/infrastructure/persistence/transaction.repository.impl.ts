@@ -3,8 +3,16 @@ import { Transaction } from '../../domain/entities/transaction.entity';
 import { TransactionType } from '../../domain/enums/transaction-type.enum';
 import prisma from '../../prisma/prisma.service';
 import { toTransactionEntity } from '../../application/helper/prisma.to.entity/transaction.to.entity';
+import { injectable } from 'inversify';
 
+@injectable()
 export class TransactionRepositoryImpl implements ITransactionRepository {
+  getAll(): Promise<Transaction[]> {
+    throw new Error('Method not implemented.');
+  }
+  getById(id: number): Promise<Transaction | null> {
+    throw new Error('Method not implemented.');
+  }
   async create(transaction: Transaction): Promise<Transaction> {
     try {
       const { id, user, transfer, fee, ...transactionData } = transaction;

@@ -1,5 +1,8 @@
+import { injectable } from "inversify";
 import { UserService } from "../../services/user.service";
 
+//Please enhance this use case
+@injectable()
 export class DeleteUserUseCase {
     constructor(private userService: UserService) {}
 

@@ -1,8 +1,9 @@
 import { UserDTO } from "../../../presentation/dtos/user.dto";
 import { toUserEntity } from "../../helper/to.entity/user.to.entity";
 import { UserService } from "../../services/user.service";
+import { injectable } from "inversify";
 
-
+@injectable()
 export class CreateUserUseCase {
     constructor(private userService: UserService) {}
 

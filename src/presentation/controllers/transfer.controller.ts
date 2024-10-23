@@ -8,7 +8,9 @@ import { FindTransfersBySenderIdUseCase } from '../../application/use-cases/tran
 import { UpdateTransferUseCase } from '../../application/use-cases/transfer.use-cases/update-transfer.use-case';
 import { DeleteTransferUseCase } from '../../application/use-cases/transfer.use-cases/delete-transfer.use-case';
 import { CreateTransferUseCase } from '../../application/use-cases/transfer.use-cases/create-transfer.use-case';
+import { injectable } from 'inversify';
 
+@injectable()
 export class TransferController {
     constructor(
         private createTransferUseCase: CreateTransferUseCase,

@@ -5,7 +5,9 @@ import { GetAdminByIdUseCase } from '../../application/use-cases/admin.use-cases
 import { FindAdminByUserIdUseCase } from '../../application/use-cases/admin.use-cases/find-admin-by-user-id.use-case';
 import { UpdateAdminUseCase } from '../../application/use-cases/admin.use-cases/update-admin.use-case';
 import { DeleteAdminUseCase } from '../../application/use-cases/admin.use-cases/delete-admin.use-case';
+import { injectable } from 'inversify';
 
+@injectable()
 export class AdminController {
     constructor(
         private createAdminUseCase: CreateAdminUseCase,

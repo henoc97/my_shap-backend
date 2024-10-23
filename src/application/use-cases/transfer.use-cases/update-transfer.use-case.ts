@@ -1,5 +1,8 @@
 import { TransferService } from "../../services/transfer.service";
 import { Transfer } from "../../../domain/entities/transfer.entity";
+import { injectable } from "inversify";
+
+@injectable()
 export class UpdateTransferUseCase {
     constructor(private transferService: TransferService) {}
 

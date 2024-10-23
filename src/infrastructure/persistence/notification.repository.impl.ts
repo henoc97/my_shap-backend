@@ -2,7 +2,9 @@ import { INotificationRepository } from '../../domain/repositories/notification.
 import { Notification } from '../../domain/entities/notification.entity';
 import prisma from '../../prisma/prisma.service';
 import { toNotificationEntity } from '../../application/helper/prisma.to.entity/notification.to.entity';
+import { injectable } from 'inversify';
 
+@injectable()
 export class NotificationRepositoryImpl implements INotificationRepository {
   async create(notification: Notification): Promise<Notification> {
     try {

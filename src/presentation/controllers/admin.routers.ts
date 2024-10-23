@@ -1,18 +1,20 @@
 import express from 'express';
-import { AdminController } from './AdminController';
+import { AdminController } from './admin.controller';
 
 const router = express.Router();
 
 // Route pour obtenir tous les admins
-router.get('/admins', AdminController.getAllAdmins);
+router.get('/admins', adminController.getAllAdmins);
 
 // Route pour créer un nouvel admin
-router.post('/admins', AdminController.createAdmin);
+router.post('/admins', adminController.createAdmin);
 
 // Route pour mettre à jour un admin
-router.put('/admins/:id', AdminController.updateAdmin);
+router.put('/admins/:id', adminController.updateAdmin);
 
 // Route pour supprimer un admin
-router.delete('/admins/:id', AdminController.deleteAdmin);
+router.delete('/admins/:id', adminController.deleteAdmin);
+
+
 
 export default router;

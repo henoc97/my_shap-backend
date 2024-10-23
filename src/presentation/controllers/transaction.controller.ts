@@ -5,8 +5,9 @@ import { GetAllTransactionsUseCase } from '../../application/use-cases/transacti
 import { FindTransactionsByUserIdUseCase } from '../../application/use-cases/transaction.use-cases/find-transactions-by-user-id.use-case';
 import { UpdateTransactionUseCase } from '../../application/use-cases/transaction.use-cases/update-transaction.use-case';
 import { DeleteTransactionUseCase } from '../../application/use-cases/transaction.use-cases/delete-transaction.use-case';
+import { injectable } from 'inversify';
 
-
+@injectable()
 export class TransactionController {
     constructor(
         private createTransactionUseCase: CreateTransactionUseCase,

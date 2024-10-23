@@ -1,6 +1,8 @@
 import { FeeService } from "../../services/fee.service";
 import { Fee } from "../../../domain/entities/fee.entity";
+import { injectable } from "inversify";
 
+@injectable()
 export class UpdateFeeUseCase {
     constructor(private feeService: FeeService) {}
 

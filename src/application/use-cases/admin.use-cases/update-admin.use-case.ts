@@ -1,6 +1,8 @@
 import { AdminService } from "../../services/admin.service";
 import { Admin } from "../../../domain/entities/admin.entity";
+import { injectable } from "inversify";
 
+@injectable()
 export class UpdateAdminUseCase {
     constructor(private adminService: AdminService) {}
 

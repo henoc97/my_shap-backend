@@ -1,8 +1,9 @@
 import { TransferDTO } from "../../../presentation/dtos/transfer.dto";
 import { toTransferEntity } from "../../helper/to.entity/transfer.to.entity";
 import { TransferService } from "../../services/transfer.service";
+import { injectable } from "inversify";
 
-
+@injectable()
 export class CreateTransferUseCase {
     constructor(private transferService: TransferService) {}
 

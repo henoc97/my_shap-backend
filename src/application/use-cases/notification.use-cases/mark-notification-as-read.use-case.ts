@@ -1,5 +1,7 @@
 import { NotificationService } from "../../services/notification.service";
+import { injectable } from "inversify";
 
+@injectable()
 export class MarkNotificationAsReadUseCase {
     constructor(private notificationService: NotificationService) {}
 

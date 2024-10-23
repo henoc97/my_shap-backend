@@ -2,7 +2,9 @@ import { IAgentRepository } from '../../domain/repositories/agent.repository';
 import { Agent } from '../../domain/entities/agent.entity';
 import prisma from '../../prisma/prisma.service';
 import { toAgentEntity } from '../../application/helper/prisma.to.entity/agent.to.entity';
+import { injectable } from 'inversify';
 
+@injectable()
 export class AgentRepositoryImpl implements IAgentRepository {
   async create(agent: Agent): Promise<Agent> {
     try {

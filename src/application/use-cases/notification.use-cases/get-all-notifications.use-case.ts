@@ -1,6 +1,8 @@
 import { Notification } from "../../../domain/entities/notification.entity";
 import { NotificationService } from "../../services/notification.service";
+import { injectable } from "inversify";
 
+@injectable()
 export class GetAllNotificationsUseCase {
     constructor(private notificationService: NotificationService) {}
 

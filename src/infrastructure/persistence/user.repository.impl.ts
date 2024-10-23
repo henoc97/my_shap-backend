@@ -2,8 +2,16 @@ import { IUserRepository } from '../../domain/repositories/user.repository';
 import { User } from '../../domain/entities/user.entity';
 import prisma from '../../prisma/prisma.service';
 import { toUserEntity } from '../../application/helper/prisma.to.entity/user.to.entity';
+import { injectable } from 'inversify';
 
+@injectable()
 export class UserRepositoryImpl implements IUserRepository {
+  getAll(): Promise<User[]> {
+    throw new Error('Method not implemented.');
+  }
+  getById(id: number): Promise<User | null> {
+    throw new Error('Method not implemented.');
+  }
 
   async create(user: User): Promise<User> {
     try {

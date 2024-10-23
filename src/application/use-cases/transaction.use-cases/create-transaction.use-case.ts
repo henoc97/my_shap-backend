@@ -1,8 +1,9 @@
 import { TransactionDTO } from "../../../presentation/dtos/transaction.dto";
 import { toTransactionEntity } from "../../helper/to.entity/transaction.to.entity";
 import { TransactionService } from "../../services/transaction.service";
+import { injectable } from "inversify";
 
-
+@injectable()
 export class CreateTransactionUseCase {
     constructor(private transactionService: TransactionService) {}
 

@@ -4,7 +4,9 @@ import { DeleteFeeUseCase } from '../../application/use-cases/fee.use-cases/dele
 import { FindFeeByTransactionIdUseCase } from '../../application/use-cases/fee.use-cases/find-fee-by-transaction-id.use-case';
 import { GetFeeByIdUseCase } from '../../application/use-cases/fee.use-cases/get-fee-by-id.use-case';
 import { UpdateFeeUseCase } from '../../application/use-cases/fee.use-cases/update-fee.use-case';
+import { injectable } from 'inversify';
 
+@injectable()
 export class FeeController {
     constructor(
         private createFeeUseCase: CreateFeeUseCase,
