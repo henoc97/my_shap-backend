@@ -1,18 +1,21 @@
 import express from 'express';
-import { AgentController } from './AgentController';
+import { container } from '../../application/containers/repositories.container';
+import { AgentController } from './agent.controller';
 
 const router = express.Router();
 
+const agentController = container.get(AgentController);
+
 // Route pour obtenir tous les agents
-router.get('/agents', AgentController.getAllAgents);
+router.get('/agents', agentController.getAllAgents);
 
 // Route pour créer un nouvel agent
-router.post('/agents', AgentController.createAgent);
+router.post('/agents', agentController.createAgent);
 
 // Route pour mettre à jour un agent
-router.put('/agents/:id', AgentController.updateAgent);
+router.put('/agents/:id', agentController.updateAgent);
 
 // Route pour supprimer un agent
-router.delete('/agents/:id', AgentController.deleteAgent);
+router.delete('/agents/:id', agentController.deleteAgent);
 
 export default router;

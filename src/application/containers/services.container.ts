@@ -16,4 +16,3 @@ container.bind(NotificationService).toSelf().inSingletonScope();
 container.bind(TransactionService).toSelf().inSingletonScope();
 container.bind(TransferService).toSelf().inSingletonScope();
 
-export { container };
