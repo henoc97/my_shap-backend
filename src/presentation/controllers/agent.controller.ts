@@ -6,18 +6,18 @@ import { FindAgentsWithTransfersUseCase } from '../../application/use-cases/agen
 import { GetAllAgentsUseCase } from '../../application/use-cases/agent.use-cases/get-all-agents.use-case';
 import { GetAgentByIdUseCase } from '../../application/use-cases/agent.use-cases/get-agent-by-id.use-case';
 import { UpdateAgentUseCase } from '../../application/use-cases/agent.use-cases/update-agent.use-case';
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
 
 @injectable()
 export class AgentController {
     constructor(
-        private createAgentUseCase: CreateAgentUseCase,
-        private deleteAgentUseCase: DeleteAgentUseCase,
-        private findAgentByUserIdUseCase: FindAgentByUserIdUseCase,
-        private findAgentsWithTransfersUseCase: FindAgentsWithTransfersUseCase,
-        private getAllAgentsUseCase: GetAllAgentsUseCase,
-        private getAgentByIdUseCase: GetAgentByIdUseCase,
-        private updateAgentUseCase: UpdateAgentUseCase
+        @inject(CreateAgentUseCase) private createAgentUseCase: CreateAgentUseCase,
+        @inject(DeleteAgentUseCase) private deleteAgentUseCase: DeleteAgentUseCase,
+        @inject(FindAgentByUserIdUseCase) private findAgentByUserIdUseCase: FindAgentByUserIdUseCase,
+        @inject(FindAgentsWithTransfersUseCase) private findAgentsWithTransfersUseCase: FindAgentsWithTransfersUseCase,
+        @inject(GetAllAgentsUseCase) private getAllAgentsUseCase: GetAllAgentsUseCase,
+        @inject(GetAgentByIdUseCase) private getAgentByIdUseCase: GetAgentByIdUseCase,
+        @inject(UpdateAgentUseCase) private updateAgentUseCase: UpdateAgentUseCase
     ) {}
 
     public async createAgent(req: Request, res: Response): Promise<void> {

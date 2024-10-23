@@ -1,5 +1,7 @@
+import { Request, Response, NextFunction } from "express";
+
 function checkScope(scope: string) {
-  return function (req: any, res: any, next: any) {
+  return function (req: Request, res: Response, next: NextFunction) {
     const permissions = (req.user as any).scope || [];
     if (permissions.includes(scope)) {
       return next();

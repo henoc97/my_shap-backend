@@ -5,17 +5,20 @@ import { GetAllTransactionsUseCase } from '../../application/use-cases/transacti
 import { FindTransactionsByUserIdUseCase } from '../../application/use-cases/transaction.use-cases/find-transactions-by-user-id.use-case';
 import { UpdateTransactionUseCase } from '../../application/use-cases/transaction.use-cases/update-transaction.use-case';
 import { DeleteTransactionUseCase } from '../../application/use-cases/transaction.use-cases/delete-transaction.use-case';
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
+import { FindTransactionsByTypeUseCase } from '../../application/use-cases/transaction.use-cases/find-transactions-by-type.use-case';
+import { TransactionType } from '../../domain/enums/transaction-type.enum';
 
 @injectable()
 export class TransactionController {
     constructor(
-        private createTransactionUseCase: CreateTransactionUseCase,
-        private getTransactionByIdUseCase: GetTransactionByIdUseCase,
-        private getAllTransactionsUseCase: GetAllTransactionsUseCase,
-        private findTransactionsByUserIdUseCase: FindTransactionsByUserIdUseCase,
-        private updateTransactionUseCase: UpdateTransactionUseCase,
-        private deleteTransactionUseCase: DeleteTransactionUseCase
+        @inject(CreateTransactionUseCase) private createTransactionUseCase: CreateTransactionUseCase,
+        @inject(GetTransactionByIdUseCase) private getTransactionByIdUseCase: GetTransactionByIdUseCase,
+        @inject(GetAllTransactionsUseCase) private getAllTransactionsUseCase: GetAllTransactionsUseCase,
+        @inject(FindTransactionsByUserIdUseCase) private findTransactionsByUserIdUseCase: FindTransactionsByUserIdUseCase,
+        @inject(FindTransactionsByTypeUseCase) private findTransactionsByTypeUseCase: FindTransactionsByTypeUseCase,
+        @inject(UpdateTransactionUseCase) private updateTransactionUseCase: UpdateTransactionUseCase,
+        @inject(DeleteTransactionUseCase) private deleteTransactionUseCase: DeleteTransactionUseCase
     ) {}
 
     public async createTransaction(req: Request, res: Response): Promise<void> {
@@ -64,6 +67,19 @@ export class TransactionController {
     public async findTransactionsByUserId(req: Request, res: Response): Promise<void> {
         try {
             const transactions = await this.findTransactionsByUserIdUseCase.execute(Number(req.params.userId));
+            res.status(200).json(transactions);
+        } catch (error) {
+            if (error instanceof Error) {
+                res.status(500).json({ error: error.message });
+            } else {
+                res.status(500).json({ error: 'An unknown error occurred' });
+            }
+        }
+    }
+
+    public async findTransactionsByType(req: Request, res: Response): Promise<void> {
+        try {
+            const transactions = await this.findTransactionsByTypeUseCase.execute(req.params.type as TransactionType);
             res.status(200).json(transactions);
         } catch (error) {
             if (error instanceof Error) {

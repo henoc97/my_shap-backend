@@ -5,17 +5,17 @@ import { GetAdminByIdUseCase } from '../../application/use-cases/admin.use-cases
 import { FindAdminByUserIdUseCase } from '../../application/use-cases/admin.use-cases/find-admin-by-user-id.use-case';
 import { UpdateAdminUseCase } from '../../application/use-cases/admin.use-cases/update-admin.use-case';
 import { DeleteAdminUseCase } from '../../application/use-cases/admin.use-cases/delete-admin.use-case';
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
 
 @injectable()
 export class AdminController {
     constructor(
-        private createAdminUseCase: CreateAdminUseCase,
-        private getAllAdminsUseCase: GetAllAdminsUseCase,
-        private getAdminByIdUseCase: GetAdminByIdUseCase,
-        private updateAdminUseCase: UpdateAdminUseCase,
-        private findAdminByUserIdUseCase: FindAdminByUserIdUseCase,
-        private deleteAdminUseCase: DeleteAdminUseCase
+        @inject(CreateAdminUseCase) private createAdminUseCase: CreateAdminUseCase,
+        @inject(GetAllAdminsUseCase) private getAllAdminsUseCase: GetAllAdminsUseCase,
+        @inject(GetAdminByIdUseCase) private getAdminByIdUseCase: GetAdminByIdUseCase,
+        @inject(UpdateAdminUseCase) private updateAdminUseCase: UpdateAdminUseCase,
+        @inject(FindAdminByUserIdUseCase) private findAdminByUserIdUseCase: FindAdminByUserIdUseCase,
+        @inject(DeleteAdminUseCase) private deleteAdminUseCase: DeleteAdminUseCase
     ) {}
 
     public async createAdmin(req: Request, res: Response): Promise<void> {

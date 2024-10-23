@@ -4,16 +4,16 @@ import { DeleteFeeUseCase } from '../../application/use-cases/fee.use-cases/dele
 import { FindFeeByTransactionIdUseCase } from '../../application/use-cases/fee.use-cases/find-fee-by-transaction-id.use-case';
 import { GetFeeByIdUseCase } from '../../application/use-cases/fee.use-cases/get-fee-by-id.use-case';
 import { UpdateFeeUseCase } from '../../application/use-cases/fee.use-cases/update-fee.use-case';
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
 
 @injectable()
 export class FeeController {
     constructor(
-        private createFeeUseCase: CreateFeeUseCase,
-        private deleteFeeUseCase: DeleteFeeUseCase,
-        private findFeeByTransactionIdUseCase: FindFeeByTransactionIdUseCase,
-        private getFeeByIdUseCase: GetFeeByIdUseCase,
-        private updateFeeUseCase: UpdateFeeUseCase
+        @inject(CreateFeeUseCase) private createFeeUseCase: CreateFeeUseCase,
+        @inject(DeleteFeeUseCase) private deleteFeeUseCase: DeleteFeeUseCase,
+        @inject(FindFeeByTransactionIdUseCase) private findFeeByTransactionIdUseCase: FindFeeByTransactionIdUseCase,
+        @inject(GetFeeByIdUseCase) private getFeeByIdUseCase: GetFeeByIdUseCase,
+        @inject(UpdateFeeUseCase) private updateFeeUseCase: UpdateFeeUseCase
     ) {}
 
     public async createFee(req: Request, res: Response): Promise<void> {

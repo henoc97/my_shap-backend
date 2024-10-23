@@ -1,7 +1,8 @@
+import { Request, Response, NextFunction } from "express";
 import { Role } from "../../../../domain/enums/role.enum";
 
 function checkRole(role: Role) {
-  return function (req: any, res: any, next: any) {
+  return function (req:Request, res: Response, next: NextFunction) {
     const userRoles = (req.user as any)._json["http://example.com/roles"] || [];
     if (userRoles.includes(role)) {
       return next();

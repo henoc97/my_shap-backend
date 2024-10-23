@@ -8,19 +8,19 @@ import { FindTransfersBySenderIdUseCase } from '../../application/use-cases/tran
 import { UpdateTransferUseCase } from '../../application/use-cases/transfer.use-cases/update-transfer.use-case';
 import { DeleteTransferUseCase } from '../../application/use-cases/transfer.use-cases/delete-transfer.use-case';
 import { CreateTransferUseCase } from '../../application/use-cases/transfer.use-cases/create-transfer.use-case';
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
 
 @injectable()
 export class TransferController {
     constructor(
-        private createTransferUseCase: CreateTransferUseCase,
-        private getAllTransfersUseCase: GetAllTransfersUseCase,
-        private getTransferByIdUseCase: GetTransferByIdUseCase,
-        private findTransfersByStatusUseCase: FindTransfersByStatusUseCase,
-        private findTransfersByReceiverIdUseCase: FindTransfersByReceiverIdUseCase,
-        private findTransfersBySenderIdUseCase: FindTransfersBySenderIdUseCase,
-        private updateTransferUseCase: UpdateTransferUseCase,
-        private deleteTransferUseCase: DeleteTransferUseCase
+        @inject(CreateTransferUseCase) private createTransferUseCase: CreateTransferUseCase,
+        @inject(GetAllTransfersUseCase) private getAllTransfersUseCase: GetAllTransfersUseCase,
+        @inject(GetTransferByIdUseCase) private getTransferByIdUseCase: GetTransferByIdUseCase,
+        @inject(FindTransfersByStatusUseCase) private findTransfersByStatusUseCase: FindTransfersByStatusUseCase,
+        @inject(FindTransfersByReceiverIdUseCase) private findTransfersByReceiverIdUseCase: FindTransfersByReceiverIdUseCase,
+        @inject(FindTransfersBySenderIdUseCase) private findTransfersBySenderIdUseCase: FindTransfersBySenderIdUseCase,
+        @inject(UpdateTransferUseCase) private updateTransferUseCase: UpdateTransferUseCase,
+        @inject(DeleteTransferUseCase) private deleteTransferUseCase: DeleteTransferUseCase
     ) {}
 
     public async createTransfer(req: Request, res: Response): Promise<void> {
