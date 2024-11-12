@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const http_1 = __importDefault(require("http"));
-// import { console } from '../console/logRotation';
+const logRotation_1 = __importDefault(require("../../application/helper/logger/logRotation"));
 /**
  * Creates an HTTP server that redirects all incoming requests to HTTPS.
  * @param {http.IncomingMessage} req - The incoming HTTP request object.
@@ -19,7 +19,7 @@ const httpServer = http_1.default.createServer((req, res) => {
     // Construct the redirect URL, changing the protocol to HTTPS and port to 8443
     const redirectUrl = `https://${host}:8443${url}`;
     // Log the redirection details
-    console.info(`Redirecting: ${url} -> ${redirectUrl}`);
+    logRotation_1.default.info(`Redirecting: ${url} -> ${redirectUrl}`);
     // Set the response header to perform a 301 permanent redirect
     res.writeHead(301, { Location: redirectUrl });
     res.end(); // End the response

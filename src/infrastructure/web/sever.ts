@@ -22,7 +22,8 @@ dotenv.config();
 
 // import { ROOT_URL } from './endpoint';
 // import cspMiddleware from '../middlewares/http/csp';
-// import { logger } from './logger/logRotation';
+import logger from '../../application/helper/logger/logRotation';
+import { error } from 'console';
 
 // Buid absolutes path
 const privateKeyPath = path.resolve(__dirname, '../ssl/server.key');
@@ -35,26 +36,22 @@ const credentials = { key: privateKey, cert: certificate };
 
 // Create Express application and HTTP server
 const app = express();
-const server = https.createServer(credentials, app);
 
 // // Import and configure WebSocket server
 // const configureWebSocket = require('./websocketServer');
 // configureWebSocket(server);
 
 // Passport configuration
-// passport.use(auth0Strategy);
-// passport.use(googleStrategy);
+passport.use(auth0Strategy);
+passport.use(googleStrategy);
 
-// // Serialization / Deserialization of the user
-// passport.serializeUser((user, done) => {
-//   done(null, user);
-// });
-// passport.deserializeUser((user, done) => {
-//   done(null, user as Express.User);
-// });
-
-// app.use(passport.initialize());
-// app.use(passport.session());
+// Serialization / Deserialization of the user
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+passport.deserializeUser((user, done) => {
+  done(null, user as Express.User);
+});
 
 // use CSP middleware
 // app.use(cspMiddleware);
@@ -68,91 +65,91 @@ app.use(helmet({ contentSecurityPolicy: false })); // Disable default CSP direct
 
 // Create a write stream for logging
 app.use((req, res, next) => {
-  // logger.info(`${req.method} ${req.url}`);
+  logger.info(`${req.method} ${req.url}`);
   console.info(`${req.method} ${req.url}`);
   next();
 });
 
 // Middleware to handle unhandled errors
-// app.use((err: any, req: any, res: any, next: any) => {
-//   // logger.error('Unhandled error:', err.stack);
-//   console.error('Unhandled error:', err.stack);
-//   res
-//     .status(500)
-//     .sendFile(path.join(__dirname, '../frontend/error/error-page500.html'));
-// });
+app.use((err: any, req: any, res: any, next: any) => {
+  logger.error('Unhandled error:', err.stack);
+  console.error('Unhandled error:', err.stack);
+  res
+    .status(500)
+    .send({ error: "Internal server error" });
+});
 
 // Middleware pour les sessions
-// app.use(
-//   session({
-//     secret: 'YOUR_SECRET_KEY',
-//     resave: false,
-//     saveUninitialized: true,
-//   })
-// );
+app.use(
+  session({
+    secret: 'YOUR_SECRET_KEY',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // // Routes de connexion avec Auth0 et Google
-// app.get(
-//   '/login',
-//   passport.authenticate('auth0', {
-//     scope: 'openid email profile',
-//   })
-// );
+app.get(
+  '/login',
+  passport.authenticate('auth0', {
+    scope: 'openid email profile',
+  })
+);
 
-// app.get(
-//   '/auth/google',
-//   passport.authenticate('google', { scope: ['profile', 'email'] })
-// );
+app.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
 
 // // Auth0 callback
-// app.get(
-//   '/callback',
-//   passport.authenticate('auth0', {
-//     failureRedirect: '/failure',
-//   }),
-//   (req, res) => {
-//     res.redirect('/');
-//   }
-// );
+app.get(
+  '/callback',
+  passport.authenticate('auth0', {
+    failureRedirect: '/failure',
+  }),
+  (req, res) => {
+    res.redirect('/');
+  }
+);
 
 // // Google callback
-// app.get(
-//   '/auth/google/callback',
-//   passport.authenticate('google', { failureRedirect: '/failure' }),
-//   (req, res) => {
-//     res.redirect('/');
-//   }
-// );
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/failure' }),
+  (req, res) => {
+    res.redirect('/');
+  }
+);
 
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET!,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//       secure: process.env.NODE_ENV === 'production',  // Assure que les cookies sont envoyés uniquement via HTTPS en production
-//       maxAge: 3600000,  // Session expire après 1 heure
-//       sameSite: 'lax',  // Prévention contre les attaques CSRF
-//     },
-//   })
-// );
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET!,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: process.env.NODE_ENV === 'production',  // Assure que les cookies sont envoyés uniquement via HTTPS en production
+      maxAge: 3600000,  // Session expire après 1 heure
+      sameSite: 'lax',  // Prévention contre les attaques CSRF
+    },
+  })
+);
 
 
 // // Page d'accueil protégée
-// app.get('/profile', (req, res) => {
-//   if (req.isAuthenticated()) {
-//     res.send(`Hello, ${(req.user as any).displayName}`);
-//   } else {
-//     res.redirect('/login');
-//   }
-// });
+app.get('/profile', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.send(`Hello, ${(req.user as any).displayName}`);
+  } else {
+    res.redirect('/login');
+  }
+});
 
-// app.get('/failure', (req, res) => {
-//   res.send('Failed to authenticate');
-// });
+app.get('/failure', (req, res) => {
+  res.send('Failed to authenticate');
+});
 
 app.use("/admin", adminRouter)
 app.use("/agent", agentRouter)
@@ -175,12 +172,15 @@ app.get('/hello', (req, res) => {
 
 
 // Middleware to handle 404 errors
-// app.use((req: any, res: any) => {
-//   // logger.warn(`404 Not Found: ${req.method} ${req.url}`);
-//   console.warn(`404 Not Found: ${req.method} ${req.url}`);
-//   res
-//     .status(404)
-//     .sendFile(path.join(__dirname, '../frontend/error/error-page404.html'));
-// });
+app.use((req: any, res: any) => {
+  logger.warn(`404 Not Found: ${req.method} ${req.url}`);
+  console.warn(`404 Not Found: ${req.method} ${req.url}`);
+  res
+    .status(404)
+    .send({ error: "Not Found" });
+});
+
+
+const server = https.createServer(credentials, app);
 
 export default server;

@@ -15,3 +15,9 @@ repositories_container_1.container.bind(get_user_by_id_use_case_1.GetUserByIdUse
 repositories_container_1.container.bind(update_user_use_case_1.UpdateUserUseCase).toSelf();
 repositories_container_1.container.bind(find_user_by_email_use_case_1.FindUserByEmailUseCase).toSelf();
 repositories_container_1.container.bind(find_active_users_use_case_1.FindActiveUsersUseCase).toSelf();
+console.log("Teste : ");
+console.log(repositories_container_1.container.isBound(create_user_use_case_1.CreateUserUseCase)); // Cela doit retourner 'true'
+console.log("Vérification des liaisons :");
+console.log(repositories_container_1.container.isBound(create_user_use_case_1.CreateUserUseCase)); // Cela doit retourner 'true'
+console.log(repositories_container_1.container.isBound(delete_user_use_case_1.DeleteUserUseCase)); // Cela doit retourner 'true'
+// Ajoutez d'autres vérifications si nécessaire

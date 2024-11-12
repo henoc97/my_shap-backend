@@ -1,4 +1,3 @@
-import { Container } from "inversify";
 import { CreateTransferUseCase } from "../../use-cases/transfer.use-cases/create-transfer.use-case";
 import { DeleteTransferUseCase } from "../../use-cases/transfer.use-cases/delete-transfer.use-case";
 import { GetAllTransfersUseCase } from "../../use-cases/transfer.use-cases/get-all-transfers.use-case";

@@ -8,11 +8,11 @@ import { TransferService } from "../services/transfer.service";
 import { container } from "./repositories.container";
 
 
-container.bind(UserService).toSelf().inSingletonScope();
-container.bind(AdminService).toSelf().inSingletonScope();
-container.bind(AgentService).toSelf().inSingletonScope();
-container.bind(FeeService).toSelf().inSingletonScope();
-container.bind(NotificationService).toSelf().inSingletonScope();
-container.bind(TransactionService).toSelf().inSingletonScope();
-container.bind(TransferService).toSelf().inSingletonScope();
+container.bind<UserService>(UserService).toSelf().inSingletonScope();
+container.bind<AdminService>(AdminService).toSelf().inSingletonScope();
+container.bind<AgentService>(AgentService).toSelf().inSingletonScope();
+container.bind<FeeService>(FeeService).toSelf().inSingletonScope();
+container.bind<NotificationService>(NotificationService).toSelf().inSingletonScope();
+container.bind<TransactionService>(TransactionService).toSelf().inSingletonScope();
+container.bind<TransferService>(TransferService).toSelf().inSingletonScope();
 

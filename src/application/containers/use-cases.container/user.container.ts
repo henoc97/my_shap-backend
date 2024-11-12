@@ -15,3 +15,11 @@ container.bind<UpdateUserUseCase>(UpdateUserUseCase).toSelf();
 container.bind<FindUserByEmailUseCase>(FindUserByEmailUseCase).toSelf();
 container.bind<FindActiveUsersUseCase>(FindActiveUsersUseCase).toSelf();
 
+console.log("Teste : ");
+console.log(container.isBound(CreateUserUseCase));  // Cela doit retourner 'true'
+
+console.log("Vérification des liaisons :");
+console.log(container.isBound(CreateUserUseCase));  // Cela doit retourner 'true'
+console.log(container.isBound(DeleteUserUseCase));  // Cela doit retourner 'true'
+// Ajoutez d'autres vérifications si nécessaire
+

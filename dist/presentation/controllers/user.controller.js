@@ -11,6 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const inversify_1 = require("inversify");
@@ -20,6 +23,7 @@ const get_user_by_id_use_case_1 = require("../../application/use-cases/user.use-
 const update_user_use_case_1 = require("../../application/use-cases/user.use-cases/update-user.use-case");
 const delete_user_use_case_1 = require("../../application/use-cases/user.use-cases/delete-user.use-case");
 const find_user_by_email_use_case_1 = require("../../application/use-cases/user.use-cases/find-user-by-email.use-case");
+const logRotation_1 = __importDefault(require("../../application/helper/logger/logRotation"));
 let UserController = class UserController {
     constructor(createUserUseCase, getAllUsersUseCase, getUserByIdUseCase, findUserByEmailUseCase, updateUserUseCase, deleteUserUseCase) {
         this.createUserUseCase = createUserUseCase;
@@ -31,14 +35,17 @@ let UserController = class UserController {
     }
     async createUser(req, res) {
         try {
+            console.log("object creating user");
             const user = await this.createUserUseCase.execute(req.dtoInstance);
             res.status(201).json(user);
         }
         catch (error) {
             if (error instanceof Error) {
+                logRotation_1.default.error(JSON.stringify({ error: error.message }));
                 res.status(500).json({ error: error.message });
             }
             else {
+                logRotation_1.default.error(JSON.stringify({ error: 'An unknown error occurred' }));
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -50,9 +57,11 @@ let UserController = class UserController {
         }
         catch (error) {
             if (error instanceof Error) {
+                logRotation_1.default.error(JSON.stringify({ error: error.message }));
                 res.status(500).json({ error: error.message });
             }
             else {
+                logRotation_1.default.error(JSON.stringify({ error: 'An unknown error occurred' }));
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -69,9 +78,11 @@ let UserController = class UserController {
         }
         catch (error) {
             if (error instanceof Error) {
+                logRotation_1.default.error(JSON.stringify({ error: error.message }));
                 res.status(500).json({ error: error.message });
             }
             else {
+                logRotation_1.default.error(JSON.stringify({ error: 'An unknown error occurred' }));
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -88,9 +99,11 @@ let UserController = class UserController {
         }
         catch (error) {
             if (error instanceof Error) {
+                logRotation_1.default.error(JSON.stringify({ error: error.message }));
                 res.status(500).json({ error: error.message });
             }
             else {
+                logRotation_1.default.error(JSON.stringify({ error: 'An unknown error occurred' }));
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -102,9 +115,11 @@ let UserController = class UserController {
         }
         catch (error) {
             if (error instanceof Error) {
+                logRotation_1.default.error(JSON.stringify({ error: error.message }));
                 res.status(500).json({ error: error.message });
             }
             else {
+                logRotation_1.default.error(JSON.stringify({ error: 'An unknown error occurred' }));
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -121,9 +136,11 @@ let UserController = class UserController {
         }
         catch (error) {
             if (error instanceof Error) {
+                logRotation_1.default.error(JSON.stringify({ error: error.message }));
                 res.status(500).json({ error: error.message });
             }
             else {
+                logRotation_1.default.error(JSON.stringify({ error: 'An unknown error occurred' }));
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }

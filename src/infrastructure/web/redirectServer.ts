@@ -1,5 +1,5 @@
 import http from 'http';
-// import { console } from '../console/logRotation';
+import logger from '../../application/helper/logger/logRotation';
 /**
  * Creates an HTTP server that redirects all incoming requests to HTTPS.
  * @param {http.IncomingMessage} req - The incoming HTTP request object.
@@ -15,7 +15,7 @@ const httpServer = http.createServer((req: any, res: any) => {
   const redirectUrl = `https://${host}:8443${url}`;
 
   // Log the redirection details
-  console.info(`Redirecting: ${url} -> ${redirectUrl}`);
+  logger.info(`Redirecting: ${url} -> ${redirectUrl}`);
 
   // Set the response header to perform a 301 permanent redirect
   res.writeHead(301, { Location: redirectUrl });

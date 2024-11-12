@@ -1,5 +1,8 @@
 import Auth0Strategy from 'passport-auth0';
+import * as dotenv from 'dotenv';
 
+// Charger les variables d'environnement depuis le fichier .env
+dotenv.config();
 
 const auth0Strategy = new Auth0Strategy(
   {

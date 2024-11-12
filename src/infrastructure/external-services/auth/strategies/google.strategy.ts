@@ -1,4 +1,8 @@
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import * as dotenv from 'dotenv';
+
+// Charger les variables d'environnement depuis le fichier .env
+dotenv.config();
 
 const googleStrategy = new GoogleStrategy(
   {

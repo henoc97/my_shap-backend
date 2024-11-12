@@ -7,6 +7,7 @@ import { GetUserByIdUseCase } from '../../application/use-cases/user.use-cases/g
 import { UpdateUserUseCase } from '../../application/use-cases/user.use-cases/update-user.use-case';
 import { DeleteUserUseCase } from '../../application/use-cases/user.use-cases/delete-user.use-case';
 import { FindUserByEmailUseCase } from '../../application/use-cases/user.use-cases/find-user-by-email.use-case';
+import logger from '../../application/helper/logger/logRotation';
 
 @injectable()
 export class UserController {
@@ -17,16 +18,19 @@ export class UserController {
         @inject(FindUserByEmailUseCase) private findUserByEmailUseCase: FindUserByEmailUseCase,
         @inject(UpdateUserUseCase) private updateUserUseCase: UpdateUserUseCase,
         @inject(DeleteUserUseCase) private deleteUserUseCase: DeleteUserUseCase
-    ) {}
+    ) { }
 
     public async createUser(req: any, res: Response): Promise<void> {
         try {
+            console.log("object creating user");
             const user = await this.createUserUseCase.execute(req.dtoInstance);
             res.status(201).json(user);
         } catch (error) {
             if (error instanceof Error) {
+                logger.error(JSON.stringify({ error: error.message }));
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error(JSON.stringify({ error: 'An unknown error occurred' }));
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -38,8 +42,10 @@ export class UserController {
             res.status(200).json(users);
         } catch (error) {
             if (error instanceof Error) {
+                logger.error(JSON.stringify({ error: error.message }));
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error(JSON.stringify({ error: 'An unknown error occurred' }));
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -55,8 +61,10 @@ export class UserController {
             }
         } catch (error) {
             if (error instanceof Error) {
+                logger.error(JSON.stringify({ error: error.message }));
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error(JSON.stringify({ error: 'An unknown error occurred' }));
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -72,8 +80,10 @@ export class UserController {
             }
         } catch (error) {
             if (error instanceof Error) {
+                logger.error(JSON.stringify({ error: error.message }));
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error(JSON.stringify({ error: 'An unknown error occurred' }));
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -85,8 +95,10 @@ export class UserController {
             res.status(200).json(updatedUser);
         } catch (error) {
             if (error instanceof Error) {
+                logger.error(JSON.stringify({ error: error.message }));
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error(JSON.stringify({ error: 'An unknown error occurred' }));
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -102,8 +114,10 @@ export class UserController {
             }
         } catch (error) {
             if (error instanceof Error) {
+                logger.error(JSON.stringify({ error: error.message }));
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error(JSON.stringify({ error: 'An unknown error occurred' }));
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }

@@ -8,11 +8,11 @@ import { TransferController } from '../../presentation/controllers/transfer.cont
 import { FeeController } from '../../presentation/controllers/fee.controller';
 
 // Enregistrement des contrôleurs dans le conteneur
-container.bind(AgentController).toSelf();
-container.bind(AdminController).toSelf();
-container.bind(UserController).toSelf();
-container.bind(TransactionController).toSelf();
-container.bind(NotificationController).toSelf();
-container.bind(TransferController).toSelf();
-container.bind(FeeController).toSelf();
+container.bind<AgentController>(AgentController).toSelf();
+container.bind<AdminController>(AdminController).toSelf();
+container.bind<UserController>(UserController).toSelf();
+container.bind<TransactionController>(TransactionController).toSelf();
+container.bind<NotificationController>(NotificationController).toSelf();
+container.bind<TransferController>(TransferController).toSelf();
+container.bind<FeeController>(FeeController).toSelf();
 

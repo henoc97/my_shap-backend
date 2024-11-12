@@ -3,7 +3,7 @@ import { UserController } from '../controllers/user.controller';
 import { container } from '../../application/containers/main.container';
 
 const userRouter = Router();
-const userController = container.get(UserController);
+const userController = container.get<UserController>(UserController);
 
 userRouter.post('/', userController.createUser);
 userRouter.get('/', userController.getAllUsers);

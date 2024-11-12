@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateUserUseCase = void 0;
 const user_to_entity_1 = require("../../helper/to.entity/user.to.entity");
@@ -30,5 +33,6 @@ let CreateUserUseCase = class CreateUserUseCase {
 exports.CreateUserUseCase = CreateUserUseCase;
 exports.CreateUserUseCase = CreateUserUseCase = __decorate([
     (0, inversify_1.injectable)(),
+    __param(0, (0, inversify_1.inject)(user_service_1.UserService)),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], CreateUserUseCase);
