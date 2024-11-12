@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const transfer_controller_1 = require("../controllers/transfer.controller");
+const main_container_1 = require("../../application/containers/main.container");
+const transferRouter = (0, express_1.Router)();
+const transferController = main_container_1.container.get(transfer_controller_1.TransferController);
+transferRouter.post('/', transferController.createTransfer);
+transferRouter.get('/', transferController.getAllTransfers);
+transferRouter.get('/:id', transferController.getTransferById);
+transferRouter.get('/status/:status', transferController.findTransfersByStatus);
+transferRouter.get('/receiver/:receiverId', transferController.findTransfersByReceiverId);
+transferRouter.get('/sender/:senderId', transferController.findTransfersBySenderId);
+transferRouter.put('/:id', transferController.updateTransfer);
+transferRouter.delete('/:id', transferController.deleteTransfer);
+exports.default = transferRouter;

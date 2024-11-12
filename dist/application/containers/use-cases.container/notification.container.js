@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const create_notification_use_case_1 = require("../../use-cases/notification.use-cases/create-notification.use-case");
+const delete_notification_use_case_1 = require("../../use-cases/notification.use-cases/delete-notification.use-case");
+const get_all_notifications_use_case_1 = require("../../use-cases/notification.use-cases/get-all-notifications.use-case");
+const get_notification_by_id_use_case_1 = require("../../use-cases/notification.use-cases/get-notification-by-id.use-case");
+const update_notification_use_case_1 = require("../../use-cases/notification.use-cases/update-notification.use-case");
+const find_notifications_by_user_id_use_case_1 = require("../../use-cases/notification.use-cases/find-notifications-by-user-id.use-case");
+const mark_notification_as_read_use_case_1 = require("../../use-cases/notification.use-cases/mark-notification-as-read.use-case");
+const repositories_container_1 = require("../repositories.container");
+repositories_container_1.container.bind(create_notification_use_case_1.CreateNotificationUseCase).toSelf();
+repositories_container_1.container.bind(delete_notification_use_case_1.DeleteNotificationUseCase).toSelf();
+repositories_container_1.container.bind(get_all_notifications_use_case_1.GetAllNotificationsUseCase).toSelf();
+repositories_container_1.container.bind(get_notification_by_id_use_case_1.GetNotificationByIdUseCase).toSelf();
+repositories_container_1.container.bind(update_notification_use_case_1.UpdateNotificationUseCase).toSelf();
+repositories_container_1.container.bind(find_notifications_by_user_id_use_case_1.FindNotificationsByUserIdUseCase).toSelf();
+repositories_container_1.container.bind(mark_notification_as_read_use_case_1.MarkNotificationAsReadUseCase).toSelf();

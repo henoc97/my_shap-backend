@@ -16,7 +16,7 @@ export class AdminController {
         @inject(UpdateAdminUseCase) private updateAdminUseCase: UpdateAdminUseCase,
         @inject(FindAdminByUserIdUseCase) private findAdminByUserIdUseCase: FindAdminByUserIdUseCase,
         @inject(DeleteAdminUseCase) private deleteAdminUseCase: DeleteAdminUseCase
-    ) {}
+    ) { }
 
     public async createAdmin(req: Request, res: Response): Promise<void> {
         try {

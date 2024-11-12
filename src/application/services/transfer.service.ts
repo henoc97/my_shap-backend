@@ -1,11 +1,11 @@
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
 import { Transfer } from "../../domain/entities/transfer.entity";
 import { TransferStatus } from "../../domain/enums/transfert-status.enum";
 import { ITransferRepository } from "../../domain/repositories/transfer.repository";
 
 @injectable()
 export class TransferService {
-    constructor(private transferRepository: ITransferRepository) {}
+    constructor(@inject("ITransferRepository") private transferRepository: ITransferRepository) { }
 
     async createTransfer(transfer: Transfer): Promise<Transfer> {
         return this.transferRepository.create(transfer);

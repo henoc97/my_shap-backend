@@ -1,10 +1,11 @@
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
 import { Admin } from "../../domain/entities/admin.entity";
 import { IAdminRepository } from "../../domain/repositories/admin.repository";
 
+
 @injectable()
 export class AdminService {
-    constructor(private adminRepository: IAdminRepository) {}
+    constructor(@inject("IAdminRepository") private adminRepository: IAdminRepository) { }
 
     async createAdmin(admin: Admin): Promise<Admin> {
         return this.adminRepository.create(admin);

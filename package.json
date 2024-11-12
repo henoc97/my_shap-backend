@@ -2,8 +2,11 @@
   "name": "my_shap-backend",
   "version": "1.0.0",
   "description": "my_shap app backend",
-  "main": "index.js",
+  "main": "dist/index.ts",
   "scripts": {
+    "build": "tsc && npm run copy-ssl",
+    "copy-ssl": "copyfiles -u 1 src/infrastructure/ssl/**/* dist/",
+    "start": "npm run build && nodemon dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +29,8 @@
     "@types/passport": "^1.0.16",
     "@types/passport-auth0": "^1.0.9",
     "@types/passport-google-oauth20": "^2.0.16",
+    "copyfiles": "^2.4.1",
+    "nodemon": "^3.1.7",
     "prisma": "^5.21.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
@@ -45,6 +50,7 @@
     "passport": "^0.7.0",
     "passport-auth0": "^1.4.4",
     "passport-google-oauth20": "^2.0.0",
+    "reflect-metadata": "^0.2.2",
     "winston": "^3.15.0",
     "winston-daily-rotate-file": "^5.0.0"
   }

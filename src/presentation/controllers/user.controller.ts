@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
 
 import { CreateUserUseCase } from '../../application/use-cases/user.use-cases/create-user.use-case';
 import { GetAllUsersUseCase } from '../../application/use-cases/user.use-cases/get-all-users.use-case';
 import { GetUserByIdUseCase } from '../../application/use-cases/user.use-cases/get-user-by-id.use-case';
 import { UpdateUserUseCase } from '../../application/use-cases/user.use-cases/update-user.use-case';
 import { DeleteUserUseCase } from '../../application/use-cases/user.use-cases/delete-user.use-case';
-import { inject, injectable } from 'inversify';
 import { FindUserByEmailUseCase } from '../../application/use-cases/user.use-cases/find-user-by-email.use-case';
 
 @injectable()

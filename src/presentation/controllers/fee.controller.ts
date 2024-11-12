@@ -14,7 +14,7 @@ export class FeeController {
         @inject(FindFeeByTransactionIdUseCase) private findFeeByTransactionIdUseCase: FindFeeByTransactionIdUseCase,
         @inject(GetFeeByIdUseCase) private getFeeByIdUseCase: GetFeeByIdUseCase,
         @inject(UpdateFeeUseCase) private updateFeeUseCase: UpdateFeeUseCase
-    ) {}
+    ) { }
 
     public async createFee(req: Request, res: Response): Promise<void> {
         try {

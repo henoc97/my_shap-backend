@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const create_fee_use_case_1 = require("../../use-cases/fee.use-cases/create-fee.use-case");
+const delete_fee_use_case_1 = require("../../use-cases/fee.use-cases/delete-fee.use-case");
+const get_fee_by_id_use_case_1 = require("../../use-cases/fee.use-cases/get-fee-by-id.use-case");
+const update_fee_use_case_1 = require("../../use-cases/fee.use-cases/update-fee.use-case");
+const find_fee_by_transaction_id_use_case_1 = require("../../use-cases/fee.use-cases/find-fee-by-transaction-id.use-case");
+const repositories_container_1 = require("../repositories.container");
+repositories_container_1.container.bind(create_fee_use_case_1.CreateFeeUseCase).toSelf();
+repositories_container_1.container.bind(delete_fee_use_case_1.DeleteFeeUseCase).toSelf();
+repositories_container_1.container.bind(get_fee_by_id_use_case_1.GetFeeByIdUseCase).toSelf();
+repositories_container_1.container.bind(update_fee_use_case_1.UpdateFeeUseCase).toSelf();
+repositories_container_1.container.bind(find_fee_by_transaction_id_use_case_1.FindFeeByTransactionIdUseCase).toSelf();

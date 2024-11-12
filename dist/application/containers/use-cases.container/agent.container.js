@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const create_agent_use_case_1 = require("../../use-cases/agent.use-cases/create-agent.use-case");
+const delete_agent_use_case_1 = require("../../use-cases/agent.use-cases/delete-agent.use-case");
+const get_all_agents_use_case_1 = require("../../use-cases/agent.use-cases/get-all-agents.use-case");
+const get_agent_by_id_use_case_1 = require("../../use-cases/agent.use-cases/get-agent-by-id.use-case");
+const update_agent_use_case_1 = require("../../use-cases/agent.use-cases/update-agent.use-case");
+const find_agent_by_user_id_use_case_1 = require("../../use-cases/agent.use-cases/find-agent-by-user-id.use-case");
+const find_agents_with_transfers_use_case_1 = require("../../use-cases/agent.use-cases/find-agents-with-transfers.use-case");
+const repositories_container_1 = require("../repositories.container");
+repositories_container_1.container.bind(create_agent_use_case_1.CreateAgentUseCase).toSelf();
+repositories_container_1.container.bind(delete_agent_use_case_1.DeleteAgentUseCase).toSelf();
+repositories_container_1.container.bind(get_all_agents_use_case_1.GetAllAgentsUseCase).toSelf();
+repositories_container_1.container.bind(get_agent_by_id_use_case_1.GetAgentByIdUseCase).toSelf();
+repositories_container_1.container.bind(update_agent_use_case_1.UpdateAgentUseCase).toSelf();
+repositories_container_1.container.bind(find_agent_by_user_id_use_case_1.FindAgentByUserIdUseCase).toSelf();
+repositories_container_1.container.bind(find_agents_with_transfers_use_case_1.FindAgentsWithTransfersUseCase).toSelf();

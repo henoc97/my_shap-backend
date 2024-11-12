@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const fee_controller_1 = require("../controllers/fee.controller");
+const main_container_1 = require("../../application/containers/main.container");
+const feeRouter = (0, express_1.Router)();
+const feeController = main_container_1.container.get(fee_controller_1.FeeController);
+feeRouter.post('/', feeController.createFee);
+feeRouter.get('/:id', feeController.getFeeById);
+feeRouter.get('/transaction/:transactionId', feeController.findFeeByTransactionId.bind(feeController));
+feeRouter.put('/:id', feeController.updateFee.bind(feeController));
+feeRouter.delete('/:id', feeController.deleteFee.bind(feeController));
+exports.default = feeRouter;

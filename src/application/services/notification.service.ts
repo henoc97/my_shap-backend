@@ -1,10 +1,10 @@
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
 import { INotificationRepository } from "../../domain/repositories/notification.repository";
 import { Notification } from "../../domain/entities/notification.entity";
 
 @injectable()
 export class NotificationService {
-    constructor(private notificationRepository: INotificationRepository) {}
+    constructor(@inject("INotificationRepository") private notificationRepository: INotificationRepository) { }
 
     async createNotification(notification: Notification): Promise<Notification> {
         return this.notificationRepository.create(notification);

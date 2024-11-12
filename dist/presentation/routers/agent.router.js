@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const agent_controller_1 = require("../controllers/agent.controller");
+const main_container_1 = require("../../application/containers/main.container");
+const agentRouter = (0, express_1.Router)();
+const agentController = main_container_1.container.get(agent_controller_1.AgentController);
+agentRouter.post('/', agentController.createAgent);
+agentRouter.get('/', agentController.getAllAgents);
+agentRouter.get('/:id', agentController.getAgentById);
+agentRouter.get('/user/:userId', agentController.findAgentByUserId);
+agentRouter.get('/with-transfers', agentController.findAgentsWithTransfers);
+agentRouter.put('/:id', agentController.updateAgent);
+agentRouter.delete('/:id', agentController.deleteAgent);
+exports.default = agentRouter;

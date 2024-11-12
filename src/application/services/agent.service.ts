@@ -1,10 +1,10 @@
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
 import { Agent } from "../../domain/entities/agent.entity";
 import { IAgentRepository } from "../../domain/repositories/agent.repository";
 
 @injectable()
 export class AgentService {
-    constructor(private agentRepository: IAgentRepository) {}
+    constructor(@inject("IAgentRepository") private agentRepository: IAgentRepository) { }
 
     async createAgent(agent: Agent): Promise<Agent> {
         return this.agentRepository.create(agent);

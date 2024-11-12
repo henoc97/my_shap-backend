@@ -9,6 +9,7 @@ import { UpdateTransferUseCase } from '../../application/use-cases/transfer.use-
 import { DeleteTransferUseCase } from '../../application/use-cases/transfer.use-cases/delete-transfer.use-case';
 import { CreateTransferUseCase } from '../../application/use-cases/transfer.use-cases/create-transfer.use-case';
 import { inject, injectable } from 'inversify';
+import { TransferStatus } from '../../domain/enums/transfert-status.enum';
 
 @injectable()
 export class TransferController {
@@ -21,7 +22,7 @@ export class TransferController {
         @inject(FindTransfersBySenderIdUseCase) private findTransfersBySenderIdUseCase: FindTransfersBySenderIdUseCase,
         @inject(UpdateTransferUseCase) private updateTransferUseCase: UpdateTransferUseCase,
         @inject(DeleteTransferUseCase) private deleteTransferUseCase: DeleteTransferUseCase
-    ) {}
+    ) { }
 
     public async createTransfer(req: Request, res: Response): Promise<void> {
         try {
@@ -68,7 +69,7 @@ export class TransferController {
 
     public async findTransfersByStatus(req: Request, res: Response): Promise<void> {
         try {
-            const transfers = await this.findTransfersByStatusUseCase.execute(req.params.status);
+            const transfers = await this.findTransfersByStatusUseCase.execute(req.params.status as unknown as TransferStatus);
             res.status(200).json(transfers);
         } catch (error) {
             if (error instanceof Error) {
@@ -128,7 +129,7 @@ export class TransferController {
             }
         } catch (error) {
             if (error instanceof Error) {
-                    res.status(500).json({ error: error.message });
+                res.status(500).json({ error: error.message });
             } else {
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
