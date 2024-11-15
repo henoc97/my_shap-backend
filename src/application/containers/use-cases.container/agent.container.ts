@@ -5,13 +5,19 @@ import { GetAgentByIdUseCase } from "../../use-cases/agent.use-cases/get-agent-b
 import { UpdateAgentUseCase } from "../../use-cases/agent.use-cases/update-agent.use-case";
 import { FindAgentByUserIdUseCase } from "../../use-cases/agent.use-cases/find-agent-by-user-id.use-case";
 import { FindAgentsWithTransfersUseCase } from "../../use-cases/agent.use-cases/find-agents-with-transfers.use-case";
-import { container } from "../repositories.container";
+import { Container } from "inversify";
 
 
-container.bind<CreateAgentUseCase>(CreateAgentUseCase).toSelf();
-container.bind<DeleteAgentUseCase>(DeleteAgentUseCase).toSelf();
-container.bind<GetAllAgentsUseCase>(GetAllAgentsUseCase).toSelf();
-container.bind<GetAgentByIdUseCase>(GetAgentByIdUseCase).toSelf();
-container.bind<UpdateAgentUseCase>(UpdateAgentUseCase).toSelf();
-container.bind<FindAgentByUserIdUseCase>(FindAgentByUserIdUseCase).toSelf();
-container.bind<FindAgentsWithTransfersUseCase>(FindAgentsWithTransfersUseCase).toSelf();
+
+function bindAgentUseCase(container: Container) {
+
+    container.bind<CreateAgentUseCase>(CreateAgentUseCase).toSelf();
+    container.bind<DeleteAgentUseCase>(DeleteAgentUseCase).toSelf();
+    container.bind<GetAllAgentsUseCase>(GetAllAgentsUseCase).toSelf();
+    container.bind<GetAgentByIdUseCase>(GetAgentByIdUseCase).toSelf();
+    container.bind<UpdateAgentUseCase>(UpdateAgentUseCase).toSelf();
+    container.bind<FindAgentByUserIdUseCase>(FindAgentByUserIdUseCase).toSelf();
+    container.bind<FindAgentsWithTransfersUseCase>(FindAgentsWithTransfersUseCase).toSelf();
+}
+
+export default bindAgentUseCase;

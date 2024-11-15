@@ -1,9 +1,13 @@
 import { Router } from 'express';
 import { TransactionController } from '../controllers/transaction.controller';
-import { container } from '../../application/containers/main.container';
+import { DIContainer } from '../../application/containers/container-inversify/container';
+import { TransactionDTO } from '../dtos/transaction.dto';
+import { validateDto } from '../../application/helper/middlewares/validate-dto.middleware';
 
 const transactionRouter = Router();
-const transactionController = container.get(TransactionController);
+const transactionController = DIContainer.getContainer().get(TransactionController);
+
+transactionRouter.use(validateDto(TransactionDTO));
 
 transactionRouter.post('/', transactionController.createTransaction);
 transactionRouter.get('/', transactionController.getAllTransactions);

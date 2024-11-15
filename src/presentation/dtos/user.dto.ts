@@ -15,15 +15,19 @@ export class UserDTO {
     @IsNumber()
     balance: number;
 
+    @IsOptional()
     @IsEnum(Role)
     role: Role;
 
+    @IsOptional()
     @IsBoolean()
     isActive: boolean;
 
+    @IsOptional()
     @IsDate()
     createdAt: Date;
 
+    @IsOptional()
     @IsDate()
     updatedAt: Date;
 

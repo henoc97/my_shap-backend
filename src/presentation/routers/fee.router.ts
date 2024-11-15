@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import { FeeController } from '../controllers/fee.controller';
-import { container } from '../../application/containers/main.container';
+import { DIContainer } from '../../application/containers/container-inversify/container';
+import { FeeDTO } from '../dtos/fee.dto';
+import { validateDto } from '../../application/helper/middlewares/validate-dto.middleware';
 
 const feeRouter = Router();
-const feeController = container.get(FeeController);
+const feeController = DIContainer.getContainer().get(FeeController);
 
+feeRouter.use(validateDto(FeeDTO));
 feeRouter.post('/', feeController.createFee);
 feeRouter.get('/:id', feeController.getFeeById);
 feeRouter.get('/transaction/:transactionId', feeController.findFeeByTransactionId.bind(feeController));

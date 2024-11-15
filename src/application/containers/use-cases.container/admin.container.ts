@@ -4,13 +4,19 @@ import { GetAllAdminsUseCase } from "../../use-cases/admin.use-cases/get-all-adm
 import { GetAdminByIdUseCase } from "../../use-cases/admin.use-cases/get-admin-by-id.use-case";
 import { UpdateAdminUseCase } from "../../use-cases/admin.use-cases/update-admin.use-case";
 import { FindAdminByUserIdUseCase } from "../../use-cases/admin.use-cases/find-admin-by-user-id.use-case";
-import { container } from "../repositories.container";
+import { Container } from "inversify";
 
 
-container.bind<CreateAdminUseCase>(CreateAdminUseCase).toSelf();
-container.bind<DeleteAdminUseCase>(DeleteAdminUseCase).toSelf();
-container.bind<GetAllAdminsUseCase>(GetAllAdminsUseCase).toSelf();
-container.bind<GetAdminByIdUseCase>(GetAdminByIdUseCase).toSelf();
-container.bind<UpdateAdminUseCase>(UpdateAdminUseCase).toSelf();
-container.bind<FindAdminByUserIdUseCase>(FindAdminByUserIdUseCase).toSelf();
 
+
+function bindAdminUseCase(container: Container) {
+
+    container.bind<CreateAdminUseCase>(CreateAdminUseCase).toSelf();
+    container.bind<DeleteAdminUseCase>(DeleteAdminUseCase).toSelf();
+    container.bind<GetAllAdminsUseCase>(GetAllAdminsUseCase).toSelf();
+    container.bind<GetAdminByIdUseCase>(GetAdminByIdUseCase).toSelf();
+    container.bind<UpdateAdminUseCase>(UpdateAdminUseCase).toSelf();
+    container.bind<FindAdminByUserIdUseCase>(FindAdminByUserIdUseCase).toSelf();
+}
+
+export default bindAdminUseCase;

@@ -5,14 +5,19 @@ import { FeeService } from "../services/fee.service";
 import { NotificationService } from "../services/notification.service";
 import { TransactionService } from "../services/transaction.service";
 import { TransferService } from "../services/transfer.service";
-import { container } from "./repositories.container";
+import TYPES from "./types/types";
+import { Container } from "inversify";
 
 
-container.bind<UserService>(UserService).toSelf().inSingletonScope();
-container.bind<AdminService>(AdminService).toSelf().inSingletonScope();
-container.bind<AgentService>(AgentService).toSelf().inSingletonScope();
-container.bind<FeeService>(FeeService).toSelf().inSingletonScope();
-container.bind<NotificationService>(NotificationService).toSelf().inSingletonScope();
-container.bind<TransactionService>(TransactionService).toSelf().inSingletonScope();
-container.bind<TransferService>(TransferService).toSelf().inSingletonScope();
+function bindService(container: Container) {
 
+    container.bind<UserService>(TYPES.UserService).to(UserService).inSingletonScope();
+    container.bind<AdminService>(AdminService).toSelf().inSingletonScope();
+    container.bind<AgentService>(AgentService).toSelf().inSingletonScope();
+    container.bind<FeeService>(FeeService).toSelf().inSingletonScope();
+    container.bind<NotificationService>(NotificationService).toSelf().inSingletonScope();
+    container.bind<TransactionService>(TransactionService).toSelf().inSingletonScope();
+    container.bind<TransferService>(TransferService).toSelf().inSingletonScope();
+}
+
+export default bindService;

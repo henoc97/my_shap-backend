@@ -1,9 +1,14 @@
 import { Router } from 'express';
 import { AgentController } from '../controllers/agent.controller';
-import { container } from '../../application/containers/main.container';
+import { DIContainer } from '../../application/containers/container-inversify/container';
+import { validateDto } from '../../application/helper/middlewares/validate-dto.middleware';
+import { AgentDTO } from '../dtos/agent.dto';
 
 const agentRouter = Router();
-const agentController = container.get(AgentController);
+const agentController = DIContainer.getContainer().get(AgentController);
+
+
+agentRouter.use(validateDto(AgentDTO));
 
 agentRouter.post('/', agentController.createAgent);
 agentRouter.get('/', agentController.getAllAgents);

@@ -14,16 +14,18 @@ import { INotificationRepository } from "../../domain/repositories/notification.
 import { IAdminRepository } from "../../domain/repositories/admin.repository";
 import { ITransactionRepository } from "../../domain/repositories/transaction.repository";
 import { ITransferRepository } from "../../domain/repositories/transfer.repository";
+import TYPES from "./types/types";
 
 
-const container = new Container();
+function bindIRepo(container: Container) {
 
-container.bind<IUserRepository>("IUserRepository").to(UserRepositoryImpl).inSingletonScope();
-container.bind<IAgentRepository>("IAgentRepository").to(AgentRepositoryImpl).inSingletonScope();
-container.bind<IFeeRepository>("IFeeRepository").to(FeeRepositoryImpl).inSingletonScope();
-container.bind<ITransactionRepository>("ITransactionRepository").to(TransactionRepositoryImpl).inSingletonScope();
-container.bind<ITransferRepository>("ITransferRepository").to(TransferRepositoryImpl).inSingletonScope();
-container.bind<INotificationRepository>("INotificationRepository").to(NotificationRepositoryImpl).inSingletonScope();
-container.bind<IAdminRepository>("IAdminRepository").to(AdminRepositoryImpl).inSingletonScope();
+    container.bind<IUserRepository>(TYPES.IUserRepository).to(UserRepositoryImpl).inSingletonScope();
+    container.bind<IAgentRepository>("IAgentRepository").to(AgentRepositoryImpl).inSingletonScope();
+    container.bind<IFeeRepository>("IFeeRepository").to(FeeRepositoryImpl).inSingletonScope();
+    container.bind<ITransactionRepository>("ITransactionRepository").to(TransactionRepositoryImpl).inSingletonScope();
+    container.bind<ITransferRepository>("ITransferRepository").to(TransferRepositoryImpl).inSingletonScope();
+    container.bind<INotificationRepository>("INotificationRepository").to(NotificationRepositoryImpl).inSingletonScope();
+    container.bind<IAdminRepository>("IAdminRepository").to(AdminRepositoryImpl).inSingletonScope();
+}
 
-export { container };
+export default bindIRepo;

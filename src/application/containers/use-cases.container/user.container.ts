@@ -5,21 +5,23 @@ import { GetUserByIdUseCase } from "../../use-cases/user.use-cases/get-user-by-i
 import { UpdateUserUseCase } from "../../use-cases/user.use-cases/update-user.use-case";
 import { FindUserByEmailUseCase } from "../../use-cases/user.use-cases/find-user-by-email.use-case";
 import { FindActiveUsersUseCase } from "../../use-cases/user.use-cases/find-active-users.use-case";
-import { container } from "../repositories.container";
+import TYPES from "../types/types";
+import { Container } from "inversify";
 
-container.bind<CreateUserUseCase>(CreateUserUseCase).toSelf();
-container.bind<DeleteUserUseCase>(DeleteUserUseCase).toSelf();
-container.bind<GetAllUsersUseCase>(GetAllUsersUseCase).toSelf();
-container.bind<GetUserByIdUseCase>(GetUserByIdUseCase).toSelf();
-container.bind<UpdateUserUseCase>(UpdateUserUseCase).toSelf();
-container.bind<FindUserByEmailUseCase>(FindUserByEmailUseCase).toSelf();
-container.bind<FindActiveUsersUseCase>(FindActiveUsersUseCase).toSelf();
 
-console.log("Teste : ");
-console.log(container.isBound(CreateUserUseCase));  // Cela doit retourner 'true'
+function bindUserUseCase(container: Container) {
+    try {
+        container.bind<CreateUserUseCase>(TYPES.CreateUserUseCase).to(CreateUserUseCase);
+        container.bind<DeleteUserUseCase>(TYPES.DeleteUserUseCase).to(DeleteUserUseCase);
+        container.bind<GetAllUsersUseCase>(TYPES.GetAllUsersUseCase).to(GetAllUsersUseCase);
+        container.bind<GetUserByIdUseCase>(TYPES.GetUserByIdUseCase).to(GetUserByIdUseCase);
+        container.bind<UpdateUserUseCase>(TYPES.UpdateUserUseCase).to(UpdateUserUseCase);
+        container.bind<FindUserByEmailUseCase>(TYPES.FindUserByEmailUseCase).to(FindUserByEmailUseCase);
+        container.bind<FindActiveUsersUseCase>(TYPES.FindActiveUsersUseCase).to(FindActiveUsersUseCase);
 
-console.log("Vérification des liaisons :");
-console.log(container.isBound(CreateUserUseCase));  // Cela doit retourner 'true'
-console.log(container.isBound(DeleteUserUseCase));  // Cela doit retourner 'true'
-// Ajoutez d'autres vérifications si nécessaire
+    } catch (error) {
+        console.log("erreur bindUserUseCase : " + error);
+    }
+}
 
+export default bindUserUseCase;

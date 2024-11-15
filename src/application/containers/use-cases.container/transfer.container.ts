@@ -6,13 +6,19 @@ import { UpdateTransferUseCase } from "../../use-cases/transfer.use-cases/update
 import { FindTransfersByStatusUseCase } from "../../use-cases/transfer.use-cases/find-transfers-by-status.use-case";
 import { FindTransfersBySenderIdUseCase } from "../../use-cases/transfer.use-cases/find-transfers-by-sender-id.use-case";
 import { FindTransfersByReceiverIdUseCase } from "../../use-cases/transfer.use-cases/find-transfers-by-receiver-id.use-case";
-import { container } from "../repositories.container";
+import { Container } from "inversify";
 
-container.bind<CreateTransferUseCase>(CreateTransferUseCase).toSelf();
-container.bind<DeleteTransferUseCase>(DeleteTransferUseCase).toSelf();
-container.bind<GetAllTransfersUseCase>(GetAllTransfersUseCase).toSelf();
-container.bind<GetTransferByIdUseCase>(GetTransferByIdUseCase).toSelf();
-container.bind<UpdateTransferUseCase>(UpdateTransferUseCase).toSelf();
-container.bind<FindTransfersByStatusUseCase>(FindTransfersByStatusUseCase).toSelf();
-container.bind<FindTransfersBySenderIdUseCase>(FindTransfersBySenderIdUseCase).toSelf();
-container.bind<FindTransfersByReceiverIdUseCase>(FindTransfersByReceiverIdUseCase).toSelf();
+
+function bindTransferUseCase(container: Container) {
+
+    container.bind<CreateTransferUseCase>(CreateTransferUseCase).toSelf();
+    container.bind<DeleteTransferUseCase>(DeleteTransferUseCase).toSelf();
+    container.bind<GetAllTransfersUseCase>(GetAllTransfersUseCase).toSelf();
+    container.bind<GetTransferByIdUseCase>(GetTransferByIdUseCase).toSelf();
+    container.bind<UpdateTransferUseCase>(UpdateTransferUseCase).toSelf();
+    container.bind<FindTransfersByStatusUseCase>(FindTransfersByStatusUseCase).toSelf();
+    container.bind<FindTransfersBySenderIdUseCase>(FindTransfersBySenderIdUseCase).toSelf();
+    container.bind<FindTransfersByReceiverIdUseCase>(FindTransfersByReceiverIdUseCase).toSelf();
+}
+
+export default bindTransferUseCase;

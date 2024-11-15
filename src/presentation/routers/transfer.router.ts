@@ -1,9 +1,13 @@
 import { Router } from 'express';
 import { TransferController } from '../controllers/transfer.controller';
-import { container } from '../../application/containers/main.container';
+import { DIContainer } from '../../application/containers/container-inversify/container';
+import { TransferDTO } from '../dtos/transfer.dto';
+import { validateDto } from '../../application/helper/middlewares/validate-dto.middleware';
 
 const transferRouter = Router();
-const transferController = container.get(TransferController);
+const transferController = DIContainer.getContainer().get(TransferController);
+
+transferRouter.use(validateDto(TransferDTO));
 
 transferRouter.post('/', transferController.createTransfer);
 transferRouter.get('/', transferController.getAllTransfers);

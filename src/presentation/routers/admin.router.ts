@@ -1,9 +1,14 @@
 import { Router } from 'express';
 import { AdminController } from '../controllers/admin.controller';
-import { container } from '../../application/containers/main.container';
+import { DIContainer } from '../../application/containers/container-inversify/container';
+import { AdminDTO } from '../dtos/admin.dto';
+import { validateDto } from '../../application/helper/middlewares/validate-dto.middleware';
 
 const adminRouter = Router();
-const adminController = container.get(AdminController);
+const adminController = DIContainer.getContainer().get(AdminController);
+
+
+adminRouter.use(validateDto(AdminDTO));
 
 adminRouter.post('/', adminController.createAdmin);
 adminRouter.get('/', adminController.getAllAdmins);

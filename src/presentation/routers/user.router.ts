@@ -1,9 +1,14 @@
 import { Router } from 'express';
 import { UserController } from '../controllers/user.controller';
-import { container } from '../../application/containers/main.container';
+import { DIContainer } from '../../application/containers/container-inversify/container';
+import TYPES from '../../application/containers/types/types';
+import { validateDto } from '../../application/helper/middlewares/validate-dto.middleware';
+import { UserDTO } from '../dtos/user.dto';
 
 const userRouter = Router();
-const userController = container.get<UserController>(UserController);
+const userController = DIContainer.getContainer().get<UserController>(TYPES.UserController);
+
+userRouter.use(validateDto(UserDTO));
 
 userRouter.post('/', userController.createUser);
 userRouter.get('/', userController.getAllUsers);

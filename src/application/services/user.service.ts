@@ -1,10 +1,11 @@
 import { inject, injectable } from "inversify";
 import { User } from "../../domain/entities/user.entity";
 import { IUserRepository } from "../../domain/repositories/user.repository";
+import TYPES from "../containers/types/types";
 
 @injectable()
 export class UserService {
-    constructor(@inject("IUserRepository") private userRepository: IUserRepository) { }
+    constructor(@inject(TYPES.IUserRepository) private userRepository: IUserRepository) { }
 
     async createUser(user: User): Promise<User> {
         return this.userRepository.create(user);

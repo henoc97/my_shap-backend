@@ -1,6 +1,7 @@
 import { plainToInstance } from "class-transformer";
 import { validate, ValidationError } from "class-validator";
 import { Request, Response, NextFunction } from "express";
+import logger from "../logger/logRotation";
 
 export function validateDto(dtoClass: any) {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -10,6 +11,7 @@ export function validateDto(dtoClass: any) {
         const errorMessages = errors
           .map((error) => Object.values(error.constraints || {}))
           .flat();
+        logger.error("errors: " + errorMessages)
         res.status(400).json({ errors: errorMessages });
       } else {
         (req as any).dtoInstance = dtoInstance;

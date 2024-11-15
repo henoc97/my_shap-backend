@@ -1,9 +1,10 @@
+import TYPES from "../../containers/types/types";
 import { UserService } from "../../services/user.service";
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
 
 @injectable()
 export class FindActiveUsersUseCase {
-    constructor(private userService: UserService) {}
+    constructor(@inject(TYPES.UserService) private userService: UserService) { }
 
     /**
      * Executes the use case to find active users.

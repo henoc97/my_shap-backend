@@ -6,7 +6,7 @@ import passport from 'passport';
 import path from 'path';
 import bodyParser from 'body-parser';
 import fs from 'fs';
-import helmet from 'helmet';
+// import helmet from 'helmet';
 import dotenv from 'dotenv';
 import auth0Strategy from '../external-services/auth/strategies/auth0.strategy';
 import googleStrategy from '../external-services/auth/strategies/google.strategy';
@@ -24,6 +24,7 @@ dotenv.config();
 // import cspMiddleware from '../middlewares/http/csp';
 import logger from '../../application/helper/logger/logRotation';
 import { error } from 'console';
+import { validateDto } from '../../application/helper/middlewares/validate-dto.middleware';
 
 // Buid absolutes path
 const privateKeyPath = path.resolve(__dirname, '../ssl/server.key');
@@ -36,6 +37,7 @@ const credentials = { key: privateKey, cert: certificate };
 
 // Create Express application and HTTP server
 const app = express();
+
 
 // // Import and configure WebSocket server
 // const configureWebSocket = require('./websocketServer');
@@ -60,7 +62,7 @@ passport.deserializeUser((user, done) => {
 app.use(bodyParser.json()); // Parse JSON request bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded request bodies
 // app.use(cookieParser());
-app.use(helmet({ contentSecurityPolicy: false })); // Disable default CSP directives from Helmet
+// app.use(helmet({ contentSecurityPolicy: false })); // Disable default CSP directives from Helmet
 // app.use(compression()); // Compress HTTP responses
 
 // Create a write stream for logging
@@ -69,6 +71,7 @@ app.use((req, res, next) => {
   console.info(`${req.method} ${req.url}`);
   next();
 });
+
 
 // Middleware to handle unhandled errors
 app.use((err: any, req: any, res: any, next: any) => {

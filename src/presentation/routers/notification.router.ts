@@ -1,9 +1,13 @@
 import { Router } from 'express';
 import { NotificationController } from '../controllers/notification.controller';
-import { container } from '../../application/containers/repositories.container';
+import { DIContainer } from '../../application/containers/container-inversify/container';
+import { NotificationDTO } from '../dtos/notification.dto';
+import { validateDto } from '../../application/helper/middlewares/validate-dto.middleware';
 
 const notificationRouter = Router();
-const notificationController = container.get(NotificationController);
+const notificationController = DIContainer.getContainer().get(NotificationController);
+
+notificationRouter.use(validateDto(NotificationDTO));
 
 notificationRouter.post('/', notificationController.createNotification);
 notificationRouter.get('/', notificationController.getAllNotifications);

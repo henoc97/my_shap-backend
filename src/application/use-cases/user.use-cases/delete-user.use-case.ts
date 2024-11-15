@@ -1,10 +1,11 @@
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
 import { UserService } from "../../services/user.service";
+import TYPES from "../../containers/types/types";
 
 //Please enhance this use case
 @injectable()
 export class DeleteUserUseCase {
-    constructor(private userService: UserService) {}
+    constructor(@inject(TYPES.UserService) private userService: UserService) { }
 
     /**
      * Executes the use case to delete a user.

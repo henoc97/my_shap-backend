@@ -8,21 +8,30 @@ import { UpdateUserUseCase } from '../../application/use-cases/user.use-cases/up
 import { DeleteUserUseCase } from '../../application/use-cases/user.use-cases/delete-user.use-case';
 import { FindUserByEmailUseCase } from '../../application/use-cases/user.use-cases/find-user-by-email.use-case';
 import logger from '../../application/helper/logger/logRotation';
+import TYPES from '../../application/containers/types/types';
 
 @injectable()
 export class UserController {
     constructor(
-        @inject(CreateUserUseCase) private createUserUseCase: CreateUserUseCase,
-        @inject(GetAllUsersUseCase) private getAllUsersUseCase: GetAllUsersUseCase,
-        @inject(GetUserByIdUseCase) private getUserByIdUseCase: GetUserByIdUseCase,
-        @inject(FindUserByEmailUseCase) private findUserByEmailUseCase: FindUserByEmailUseCase,
-        @inject(UpdateUserUseCase) private updateUserUseCase: UpdateUserUseCase,
-        @inject(DeleteUserUseCase) private deleteUserUseCase: DeleteUserUseCase
-    ) { }
+        @inject(TYPES.CreateUserUseCase) private createUserUseCase: CreateUserUseCase,
+        @inject(TYPES.GetAllUsersUseCase) private getAllUsersUseCase: GetAllUsersUseCase,
+        @inject(TYPES.GetUserByIdUseCase) private getUserByIdUseCase: GetUserByIdUseCase,
+        @inject(TYPES.FindUserByEmailUseCase) private findUserByEmailUseCase: FindUserByEmailUseCase,
+        @inject(TYPES.UpdateUserUseCase) private updateUserUseCase: UpdateUserUseCase,
+        @inject(TYPES.DeleteUserUseCase) private deleteUserUseCase: DeleteUserUseCase
+    ) {
+        this.createUser = this.createUser.bind(this);
+        this.getAllUsers = this.getAllUsers.bind(this);
+        this.getUserById = this.getUserById.bind(this);
+        this.getUserByEmail = this.getUserByEmail.bind(this);
+        this.updateUser = this.updateUser.bind(this);
+        this.deleteUser = this.deleteUser.bind(this);
+    }
 
     public async createUser(req: any, res: Response): Promise<void> {
+        console.log("body : " + JSON.stringify(req.body));
+        console.log("dtoInstance : " + JSON.stringify(req.dtoInstance));
         try {
-            console.log("object creating user");
             const user = await this.createUserUseCase.execute(req.dtoInstance);
             res.status(201).json(user);
         } catch (error) {
@@ -36,7 +45,7 @@ export class UserController {
         }
     }
 
-    public async getAllUsers(req: Request, res: Response): Promise<void> {
+    public async getAllUsers(req: any, res: any): Promise<void> {
         try {
             const users = await this.getAllUsersUseCase.execute();
             res.status(200).json(users);
