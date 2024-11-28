@@ -1,7 +1,7 @@
 import { ITransactionRepository } from '../../domain/repositories/transaction.repository';
 import { Transaction } from '../../domain/entities/transaction.entity';
 import { TransactionType } from '../../domain/enums/transaction-type.enum';
-import prisma from '../../prisma/prisma.service';
+import prisma from '../../../prisma/prisma.service';
 import { toTransactionEntity } from '../../application/helper/prisma.to.entity/transaction.to.entity';
 import { injectable } from 'inversify';
 

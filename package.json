@@ -5,8 +5,8 @@
   "main": "dist/index.ts",
   "scripts": {
     "build": "tsc && npm run copy-ssl",
-    "copy-ssl": "copyfiles -u 1 src/infrastructure/ssl/**/* dist/",
-    "start": "npm run build && nodemon dist/index.js",
+    "copy-ssl": "copyfiles -u 1 src/infrastructure/ssl/**/* dist/src/",
+    "start": "npm run build && nodemon dist/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

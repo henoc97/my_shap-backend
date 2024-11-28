@@ -1,6 +1,6 @@
 import { INotificationRepository } from '../../domain/repositories/notification.repository';
 import { Notification } from '../../domain/entities/notification.entity';
-import prisma from '../../prisma/prisma.service';
+import prisma from '../../../prisma/prisma.service';
 import { toNotificationEntity } from '../../application/helper/prisma.to.entity/notification.to.entity';
 import { injectable } from 'inversify';
 

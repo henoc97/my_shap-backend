@@ -9,6 +9,7 @@ export function toUserEntity(dto: any): User {
         "",
         dto.balance,
         dto.role,
-        dto.isActive
+        dto.isActive,
+        // dto.createdAt
     );
 }

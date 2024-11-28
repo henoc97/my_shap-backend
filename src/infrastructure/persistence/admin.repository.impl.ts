@@ -1,6 +1,6 @@
 import { IAdminRepository } from '../../domain/repositories/admin.repository';
 import { Admin } from '../../domain/entities/admin.entity';
-import prisma from '../../prisma/prisma.service';
+import prisma from '../../../prisma/prisma.service';
 import { toAdminEntity } from '../../application/helper/prisma.to.entity/admin.to.entity';
 import { injectable } from 'inversify';
 

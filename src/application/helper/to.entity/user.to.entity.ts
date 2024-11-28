@@ -4,7 +4,7 @@ import { UserDTO } from "../../../presentation/dtos/user.dto";
 
 export function toUserEntity(dto: UserDTO): User {
     return new User(
-        dto.id,
+        dto.id!,
         dto.name,
         dto.email,
         "",

@@ -1,0 +1,1 @@
+- Faire un middleware pour catch toutes les erreur.

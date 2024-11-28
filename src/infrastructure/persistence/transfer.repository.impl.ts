@@ -1,7 +1,7 @@
 import { ITransferRepository } from '../../domain/repositories/transfer.repository';
 import { Transfer } from '../../domain/entities/transfer.entity';
 import { TransferStatus } from '../../domain/enums/transfert-status.enum';
-import prisma from '../../prisma/prisma.service';
+import prisma from '../../../prisma/prisma.service';
 import { toTransferEntity } from '../../application/helper/prisma.to.entity/transfer.to.entity';
 import { injectable } from 'inversify';
 
@@ -9,7 +9,7 @@ import { injectable } from 'inversify';
 export class TransferRepositoryImpl implements ITransferRepository {
   async create(transfer: Transfer): Promise<Transfer> {
     try {
-        const { id, sender, receiver, agent, fee, transaction, ...transferData } = transfer;
+      const { id, sender, receiver, agent, fee, transaction, ...transferData } = transfer;
       const result = await prisma.transfer.create({ data: transferData });
       return toTransferEntity(result);
     } catch (error) {

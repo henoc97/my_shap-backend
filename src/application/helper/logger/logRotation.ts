@@ -5,11 +5,16 @@ import fs from "fs";
 
 // Directory for storing log files
 const logDirectory: string = path.resolve(__dirname, 'logs');
+console.log('Log Directory:', logDirectory);
 
 // Create the log directory if it does not exist
 if (!fs.existsSync(logDirectory)) {
+  console.log(`Creating log directory at: ${logDirectory}`);
   fs.mkdirSync(logDirectory);
+} else {
+  console.log(`Log directory exists at: ${logDirectory}`);
 }
+
 
 /**
  * Transport for winston to handle log file rotation daily.

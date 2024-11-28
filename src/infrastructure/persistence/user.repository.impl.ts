@@ -1,23 +1,17 @@
 import { IUserRepository } from '../../domain/repositories/user.repository';
 import { User } from '../../domain/entities/user.entity';
-import prisma from '../../prisma/prisma.service';
+import prisma from '../../../prisma/prisma.service';
 import { toUserEntity } from '../../application/helper/prisma.to.entity/user.to.entity';
 import { injectable } from 'inversify';
 
 @injectable()
 export class UserRepositoryImpl implements IUserRepository {
-  getAll(): Promise<User[]> {
-    throw new Error('Method not implemented.');
-  }
-  getById(id: number): Promise<User | null> {
-    throw new Error('Method not implemented.');
-  }
 
   async create(user: User): Promise<User> {
     try {
-        const { id, transfersSent, transfersReceived, transactions, notifications, agent, admin, ...userData } = user;
-        const result = await prisma.user.create({ data: userData });
-        const userDataEntity = toUserEntity(result);
+      const { id, transfersSent, transfersReceived, transactions, notifications, agent, admin, ...userData } = user;
+      const result = await prisma.user.create({ data: userData });
+      const userDataEntity = toUserEntity(result);
       return userDataEntity;
     } catch (error) {
       console.error('Error creating user:', error);
@@ -25,7 +19,7 @@ export class UserRepositoryImpl implements IUserRepository {
     }
   }
 
-  async readAll(): Promise<User[]> {
+  async getAll(): Promise<User[]> {
     try {
       const result = await prisma.user.findMany();
       return result.map(toUserEntity);
@@ -35,7 +29,7 @@ export class UserRepositoryImpl implements IUserRepository {
     }
   }
 
-  async readById(id: number): Promise<User | null> {
+  async getById(id: number): Promise<User | null> {
     try {
       const result = await prisma.user.findUnique({ where: { id } });
       return toUserEntity(result);

@@ -28,7 +28,7 @@ export class UserController {
         this.deleteUser = this.deleteUser.bind(this);
     }
 
-    public async createUser(req: any, res: Response): Promise<void> {
+    public createUser = async (req: any, res: Response): Promise<void> => {
         console.log("body : " + JSON.stringify(req.body));
         console.log("dtoInstance : " + JSON.stringify(req.dtoInstance));
         try {
@@ -45,7 +45,7 @@ export class UserController {
         }
     }
 
-    public async getAllUsers(req: any, res: any): Promise<void> {
+    public getAllUsers = async (req: any, res: Response): Promise<void> => {
         try {
             const users = await this.getAllUsersUseCase.execute();
             res.status(200).json(users);
@@ -60,7 +60,7 @@ export class UserController {
         }
     }
 
-    public async getUserById(req: Request, res: Response): Promise<void> {
+    public getUserById = async (req: Request, res: Response): Promise<void> => {
         try {
             const user = await this.getUserByIdUseCase.execute(Number(req.params.id));
             if (user) {
@@ -79,7 +79,7 @@ export class UserController {
         }
     }
 
-    public async getUserByEmail(req: Request, res: Response): Promise<void> {
+    public getUserByEmail = async (req: Request, res: Response): Promise<void> => {
         try {
             const user = await this.findUserByEmailUseCase.execute(req.params.email);
             if (user) {
@@ -98,7 +98,7 @@ export class UserController {
         }
     }
 
-    public async updateUser(req: Request, res: Response): Promise<void> {
+    public updateUser = async (req: Request, res: Response): Promise<void> => {
         try {
             const updatedUser = await this.updateUserUseCase.execute(Number(req.params.id), req.body);
             res.status(200).json(updatedUser);
@@ -113,7 +113,7 @@ export class UserController {
         }
     }
 
-    public async deleteUser(req: Request, res: Response): Promise<void> {
+    public deleteUser = async (req: Request, res: Response): Promise<void> => {
         try {
             const success = await this.deleteUserUseCase.execute(Number(req.params.id));
             if (success) {

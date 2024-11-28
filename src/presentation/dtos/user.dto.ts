@@ -3,15 +3,18 @@ import { Role } from '../../domain/enums/role.enum';
 
 export class UserDTO {
     @IsNumber()
-    id: number;
+    @IsOptional()
+    id?: number;
 
     @IsEmail()
     @IsOptional()
     email?: string;
 
+    @IsOptional()
     @IsString()
     name: string;
 
+    @IsOptional()
     @IsNumber()
     balance: number;
 
