@@ -17,7 +17,7 @@ function bindService(container: Container) {
     container.bind<FeeService>(FeeService).toSelf().inSingletonScope();
     container.bind<NotificationService>(NotificationService).toSelf().inSingletonScope();
     container.bind<TransactionService>(TransactionService).toSelf().inSingletonScope();
-    container.bind<TransferService>(TransferService).toSelf().inSingletonScope();
+    container.bind<TransferService>(TYPES.TransferService).to(TransferService).inSingletonScope();
 }
 
 export default bindService;

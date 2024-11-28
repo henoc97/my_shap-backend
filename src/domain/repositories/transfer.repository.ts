@@ -5,6 +5,7 @@ export interface ITransferRepository {
     create(transfer: Transfer): Promise<Transfer>;
     getAll(): Promise<Transfer[]>;
     getById(id: number): Promise<Transfer | null>;
+    getByCode(code: string): Promise<Transfer | null>;
     update(id: number, transfer: Partial<Transfer>): Promise<Transfer | null>;
     delete(id: number): Promise<boolean>;
     findBySenderId(senderId: number): Promise<Transfer[]>;

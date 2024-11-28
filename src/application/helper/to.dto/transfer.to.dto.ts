@@ -10,6 +10,8 @@ export function toTransferDTO(entity: Transfer): TransferDTO {
         entity.receiverId,
         entity.createdAt,
         entity.status,
-        entity.isNonUser
+        entity.isNonUser,
+        entity.contact,
+        entity.countryCode,
     );
 }

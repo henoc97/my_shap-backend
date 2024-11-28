@@ -19,12 +19,24 @@ export class UserDTO {
     balance: number;
 
     @IsOptional()
+    @IsNumber()
+    contact: string;
+
+    @IsOptional()
+    @IsNumber()
+    countryCode: string;
+
+    @IsOptional()
     @IsEnum(Role)
     role: Role;
 
     @IsOptional()
     @IsBoolean()
     isActive: boolean;
+
+    @IsOptional()
+    @IsString()
+    otp?: number;
 
     @IsOptional()
     @IsDate()
@@ -38,15 +50,21 @@ export class UserDTO {
         id: number,
         name: string,
         email: string | undefined,
+        contact: string,
+        countryCode: string,
         balance: number,
         role: Role,
         isActive: boolean,
         createdAt: Date,
-        updatedAt: Date
+        updatedAt: Date,
+        otp?: number,
     ) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.contact = contact;
+        this.otp = otp;
+        this.countryCode = countryCode;
         this.balance = balance;
         this.role = role;
         this.isActive = isActive;

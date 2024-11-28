@@ -11,6 +11,7 @@ const userController = DIContainer.getContainer().get<UserController>(TYPES.User
 userRouter.get('/', userController.getAllUsers);
 userRouter.get('/:id', userController.getUserById);
 userRouter.get('/email/:email', userController.getUserByEmail);
+userRouter.get('/receiver/:countryCode/:contact', userController.isUserByContact);
 userRouter.delete('/:id', userController.deleteUser);
 
 userRouter.use(validateDto(UserDTO));

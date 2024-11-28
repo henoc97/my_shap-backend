@@ -10,28 +10,42 @@ import { DeleteTransferUseCase } from '../../application/use-cases/transfer.use-
 import { CreateTransferUseCase } from '../../application/use-cases/transfer.use-cases/create-transfer.use-case';
 import { inject, injectable } from 'inversify';
 import { TransferStatus } from '../../domain/enums/transfert-status.enum';
+import TYPES from '../../application/containers/types/types';
+import { validateOtpCreate } from '../../application/helper/middlewares/validate-otp-create';
+import logger from '../../application/helper/logger/logRotation';
 
 @injectable()
 export class TransferController {
     constructor(
-        @inject(CreateTransferUseCase) private createTransferUseCase: CreateTransferUseCase,
-        @inject(GetAllTransfersUseCase) private getAllTransfersUseCase: GetAllTransfersUseCase,
-        @inject(GetTransferByIdUseCase) private getTransferByIdUseCase: GetTransferByIdUseCase,
-        @inject(FindTransfersByStatusUseCase) private findTransfersByStatusUseCase: FindTransfersByStatusUseCase,
-        @inject(FindTransfersByReceiverIdUseCase) private findTransfersByReceiverIdUseCase: FindTransfersByReceiverIdUseCase,
-        @inject(FindTransfersBySenderIdUseCase) private findTransfersBySenderIdUseCase: FindTransfersBySenderIdUseCase,
-        @inject(UpdateTransferUseCase) private updateTransferUseCase: UpdateTransferUseCase,
-        @inject(DeleteTransferUseCase) private deleteTransferUseCase: DeleteTransferUseCase
-    ) { }
+        @inject(TYPES.CreateTransferUseCase) private createTransferUseCase: CreateTransferUseCase,
+        @inject(TYPES.GetAllTransfersUseCase) private getAllTransfersUseCase: GetAllTransfersUseCase,
+        @inject(TYPES.GetTransferByIdUseCase) private getTransferByIdUseCase: GetTransferByIdUseCase,
+        @inject(TYPES.FindTransfersByStatusUseCase) private findTransfersByStatusUseCase: FindTransfersByStatusUseCase,
+        @inject(TYPES.FindTransfersByReceiverIdUseCase) private findTransfersByReceiverIdUseCase: FindTransfersByReceiverIdUseCase,
+        @inject(TYPES.FindTransfersBySenderIdUseCase) private findTransfersBySenderIdUseCase: FindTransfersBySenderIdUseCase,
+        @inject(TYPES.UpdateTransferUseCase) private updateTransferUseCase: UpdateTransferUseCase,
+        @inject(TYPES.DeleteTransferUseCase) private deleteTransferUseCase: DeleteTransferUseCase
+    ) {
+        this.createTransfer = this.createTransfer.bind(this);
+        this.getAllTransfers = this.getAllTransfers.bind(this);
+        this.getTransferById = this.getTransferById.bind(this);
+        this.findTransfersByStatus = this.findTransfersByStatus.bind(this);
+        this.findTransfersByReceiverId = this.findTransfersByReceiverId.bind(this);
+        this.findTransfersBySenderId = this.findTransfersBySenderId.bind(this);
+        this.updateTransfer = this.updateTransfer.bind(this);
+        this.deleteTransfer = this.deleteTransfer.bind(this);
+    }
 
-    public async createTransfer(req: Request, res: Response): Promise<void> {
+    public async createTransfer(req: any, res: Response): Promise<void> {
         try {
-            const transfer = await this.createTransferUseCase.execute(req.body);
-            res.status(201).json(transfer);
+            const contact = `+${req.user.countryCode}${req.user.contact}`
+            validateOtpCreate(req, res, contact, () => this.createTransferUseCase.execute(req.dtoInstance))
         } catch (error) {
             if (error instanceof Error) {
+                logger.error({ error: error.message });
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error({ error: 'An unknown error occurred' });
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -43,8 +57,10 @@ export class TransferController {
             res.status(200).json(transfers);
         } catch (error) {
             if (error instanceof Error) {
+                logger.error({ error: error.message });
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error({ error: 'An unknown error occurred' });
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -56,12 +72,15 @@ export class TransferController {
             if (transfer) {
                 res.status(200).json(transfer);
             } else {
+                logger.error({ error: 'Transfer not found' });
                 res.status(404).json({ error: 'Transfer not found' });
             }
         } catch (error) {
             if (error instanceof Error) {
+                logger.error({ error: error.message });
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error({ error: 'An unknown error occurred' });
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -73,8 +92,10 @@ export class TransferController {
             res.status(200).json(transfers);
         } catch (error) {
             if (error instanceof Error) {
+                logger.error({ error: error.message });
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error({ error: 'An unknown error occurred' });
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -86,8 +107,10 @@ export class TransferController {
             res.status(200).json(transfers);
         } catch (error) {
             if (error instanceof Error) {
+                logger.error({ error: error.message });
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error({ error: 'An unknown error occurred' });
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -99,8 +122,10 @@ export class TransferController {
             res.status(200).json(transfers);
         } catch (error) {
             if (error instanceof Error) {
+                logger.error({ error: error.message });
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error({ error: 'An unknown error occurred' });
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -112,8 +137,10 @@ export class TransferController {
             res.status(200).json(updatedTransfer);
         } catch (error) {
             if (error instanceof Error) {
+                logger.error({ error: error.message });
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error({ error: 'An unknown error occurred' });
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }
@@ -125,12 +152,15 @@ export class TransferController {
             if (success) {
                 res.status(204).send();
             } else {
+                logger.error({ error: 'Transfer not found' });
                 res.status(404).json({ error: 'Transfer not found' });
             }
         } catch (error) {
             if (error instanceof Error) {
+                logger.error({ error: error.message });
                 res.status(500).json({ error: error.message });
             } else {
+                logger.error({ error: 'An unknown error occurred' });
                 res.status(500).json({ error: 'An unknown error occurred' });
             }
         }

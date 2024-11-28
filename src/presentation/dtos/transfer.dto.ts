@@ -19,9 +19,23 @@ export class TransferDTO {
     @IsNumber()
     agentId?: number;
 
+    // Reciver's
+    @IsOptional()
+    @IsString()
+    contact?: string;
+
+    // Reciver's
+    @IsOptional()
+    @IsString()
+    countryCode?: string;
+
     @IsOptional()
     @IsNumber()
     feeId?: number;
+
+    @IsOptional()
+    @IsString()
+    otp?: string;
 
     @IsOptional()
     @IsDate()
@@ -43,12 +57,18 @@ export class TransferDTO {
         receiverId: number | undefined,
         createdAt: Date,
         status: TransferStatus,
-        isNonUser: boolean
+        isNonUser: boolean,
+        contact?: string,
+        countryCode?: string,
+        otp?: string,
     ) {
         this.id = id;
         this.amount = amount;
         this.senderId = senderId;
+        this.contact = contact;
+        this.countryCode = countryCode;
         this.receiverId = receiverId;
+        this.otp = otp;
         this.createdAt = createdAt;
         this.status = status;
         this.isNonUser = isNonUser;

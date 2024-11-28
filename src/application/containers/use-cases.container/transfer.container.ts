@@ -7,18 +7,19 @@ import { FindTransfersByStatusUseCase } from "../../use-cases/transfer.use-cases
 import { FindTransfersBySenderIdUseCase } from "../../use-cases/transfer.use-cases/find-transfers-by-sender-id.use-case";
 import { FindTransfersByReceiverIdUseCase } from "../../use-cases/transfer.use-cases/find-transfers-by-receiver-id.use-case";
 import { Container } from "inversify";
+import TYPES from "../types/types";
 
 
 function bindTransferUseCase(container: Container) {
 
-    container.bind<CreateTransferUseCase>(CreateTransferUseCase).toSelf();
-    container.bind<DeleteTransferUseCase>(DeleteTransferUseCase).toSelf();
-    container.bind<GetAllTransfersUseCase>(GetAllTransfersUseCase).toSelf();
-    container.bind<GetTransferByIdUseCase>(GetTransferByIdUseCase).toSelf();
-    container.bind<UpdateTransferUseCase>(UpdateTransferUseCase).toSelf();
-    container.bind<FindTransfersByStatusUseCase>(FindTransfersByStatusUseCase).toSelf();
-    container.bind<FindTransfersBySenderIdUseCase>(FindTransfersBySenderIdUseCase).toSelf();
-    container.bind<FindTransfersByReceiverIdUseCase>(FindTransfersByReceiverIdUseCase).toSelf();
+    container.bind<CreateTransferUseCase>(TYPES.CreateTransferUseCase).to(CreateTransferUseCase);
+    container.bind<DeleteTransferUseCase>(TYPES.DeleteTransferUseCase).to(DeleteTransferUseCase);
+    container.bind<GetAllTransfersUseCase>(TYPES.GetAllTransfersUseCase).to(GetAllTransfersUseCase);
+    container.bind<GetTransferByIdUseCase>(TYPES.GetTransferByIdUseCase).to(GetTransferByIdUseCase);
+    container.bind<UpdateTransferUseCase>(TYPES.UpdateTransferUseCase).to(UpdateTransferUseCase);
+    container.bind<FindTransfersByStatusUseCase>(TYPES.FindTransfersByStatusUseCase).to(FindTransfersByStatusUseCase);
+    container.bind<FindTransfersBySenderIdUseCase>(TYPES.FindTransfersBySenderIdUseCase).to(FindTransfersBySenderIdUseCase);
+    container.bind<FindTransfersByReceiverIdUseCase>(TYPES.FindTransfersByReceiverIdUseCase).to(FindTransfersByReceiverIdUseCase);
 }
 
 export default bindTransferUseCase;

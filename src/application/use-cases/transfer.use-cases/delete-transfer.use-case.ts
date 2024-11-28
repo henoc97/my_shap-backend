@@ -1,9 +1,10 @@
+import TYPES from "../../containers/types/types";
 import { TransferService } from "../../services/transfer.service";
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
 
 @injectable()
 export class DeleteTransferUseCase {
-    constructor(private transferService: TransferService) {}
+    constructor(@inject(TYPES.TransferService) private transferService: TransferService) { }
 
     /**
      * Executes the use case to delete a transfer.

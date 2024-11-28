@@ -8,8 +8,6 @@ import bodyParser from 'body-parser';
 import fs from 'fs';
 // import helmet from 'helmet';
 import dotenv from 'dotenv';
-import auth0Strategy from '../external-services/auth/strategies/auth0.strategy';
-import googleStrategy from '../external-services/auth/strategies/google.strategy';
 import adminRouter from '../../presentation/routers/admin.router';
 import agentRouter from '../../presentation/routers/agent.router';
 import feeRouter from '../../presentation/routers/fee.router';
@@ -26,6 +24,8 @@ import logger from '../../application/helper/logger/logRotation';
 import { error } from 'console';
 import { validateDto } from '../../application/helper/middlewares/validate-dto.middleware';
 import errorLoggingMiddleware from '../../application/helper/middlewares/error-log/error-logging-filter';
+import { createMessage } from '../external-services/twilio/client';
+import otpRouter from '../../presentation/routers/otp.router';
 
 // Buid absolutes path
 const privateKeyPath = path.resolve(__dirname, '../ssl/server.key');
@@ -44,17 +44,6 @@ const app = express();
 // const configureWebSocket = require('./websocketServer');
 // configureWebSocket(server);
 
-// Passport configuration
-// passport.use(auth0Strategy);
-// passport.use(googleStrategy);
-
-// // Serialization / Deserialization of the user
-// passport.serializeUser((user, done) => {
-//   done(null, user);
-// });
-// passport.deserializeUser((user, done) => {
-//   done(null, user as Express.User);
-// });
 
 // use CSP middleware
 // app.use(cspMiddleware);
@@ -74,87 +63,8 @@ app.use((req, res, next) => {
 });
 
 
-// Middleware to handle unhandled errors
-// app.use((err: any, req: any, res: any, next: any) => {
-//   logger.error('Unhandled error:', err.stack);
-//   console.error('Unhandled error:', err.stack);
-//   res
-//     .status(500)
-//     .send({ error: "Internal server error" });
-// });
 
-// Middleware pour les sessions
-// app.use(
-//   session({
-//     secret: 'YOUR_SECRET_KEY',
-//     resave: false,
-//     saveUninitialized: true,
-//   })
-// );
-
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-// // // Routes de connexion avec Auth0 et Google
-// app.get(
-//   '/login',
-//   passport.authenticate('auth0', {
-//     scope: 'openid email profile',
-//   })
-// );
-
-// app.get(
-//   '/auth/google',
-//   passport.authenticate('google', { scope: ['profile', 'email'] })
-// );
-
-// // // Auth0 callback
-// app.get(
-//   '/callback',
-//   passport.authenticate('auth0', {
-//     failureRedirect: '/failure',
-//   }),
-//   (req, res) => {
-//     res.redirect('/');
-//   }
-// );
-
-// // // Google callback
-// app.get(
-//   '/auth/google/callback',
-//   passport.authenticate('google', { failureRedirect: '/failure' }),
-//   (req, res) => {
-//     res.redirect('/');
-//   }
-// );
-
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET!,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//       secure: process.env.NODE_ENV === 'production',  // Assure que les cookies sont envoyés uniquement via HTTPS en production
-//       maxAge: 3600000,  // Session expire après 1 heure
-//       sameSite: 'lax',  // Prévention contre les attaques CSRF
-//     },
-//   })
-// );
-
-
-// // Page d'accueil protégée
-// app.get('/profile', (req, res) => {
-//   if (req.isAuthenticated()) {
-//     res.send(`Hello, ${(req.user as any).displayName}`);
-//   } else {
-//     res.redirect('/login');
-//   }
-// });
-
-// app.get('/failure', (req, res) => {
-//   res.send('Failed to authenticate');
-// });
-
+app.use("/otp", otpRouter)
 app.use("/admin", adminRouter)
 app.use("/agent", agentRouter)
 app.use("/fee", feeRouter)
@@ -173,6 +83,11 @@ app.use(errorLoggingMiddleware)
 
 app.get('/hello', (req, res) => {
   res.send('Hello',);
+});
+
+app.get('/test', (req, res) => {
+  createMessage();
+  res.status(200).send("c est bon")
 });
 
 

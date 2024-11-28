@@ -15,28 +15,28 @@ const container = new Container();
 
 export function initContainer(): Container {
     bindIRepo(container);
-    console.log("repo bound");
+
 
     bindService(container);
-    console.log("service bound");
+
 
     bindUserUseCase(container);
-    console.log("user bound");
+
     bindAdminUseCase(container);
-    console.log("admin bound");
+
     bindFeeUseCase(container);
-    console.log("fee bound");
+
     bindNotificationUseCase(container);
-    console.log("notif bound");
+
     bindAgentUseCase(container);
-    console.log("agent bound");
+
     bindTransctionUseCase(container);
-    console.log("transac bound");
+
     bindTransferUseCase(container);
-    console.log("transfer bound");
+
 
     bindControllers(container);
-    console.log("controller bound");
+
 
     return container;
 }

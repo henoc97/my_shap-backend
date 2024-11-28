@@ -7,6 +7,8 @@ export function toUserDTO(entity: User): UserDTO {
         entity.id,
         entity.name,
         entity.email,
+        entity.contact,
+        entity.countryCode,
         entity.balance,
         entity.role,
         entity.isActive,

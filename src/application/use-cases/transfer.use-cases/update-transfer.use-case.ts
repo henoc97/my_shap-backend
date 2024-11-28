@@ -1,10 +1,11 @@
 import { TransferService } from "../../services/transfer.service";
 import { Transfer } from "../../../domain/entities/transfer.entity";
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
+import TYPES from "../../containers/types/types";
 
 @injectable()
 export class UpdateTransferUseCase {
-    constructor(private transferService: TransferService) {}
+    constructor(@inject(TYPES.TransferService) private transferService: TransferService) { }
 
     /**
      * Executes the use case to update a transfer.

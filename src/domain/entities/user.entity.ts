@@ -10,6 +10,8 @@ export class User {
   email?: string;
   name: string;
   password?: string;
+  contact: string;
+  countryCode: string = "228";
   balance: number = 0.0;
   role: Role = Role.USER;
   isActive: boolean = true;
@@ -25,9 +27,11 @@ export class User {
 
   constructor(
     id: number,
+    contact: string,
     name: string,
     email?: string,
     password?: string,
+    countryCode: string = "228",
     balance: number = 0.0,
     role: Role = Role.USER,
     isActive: boolean = true,
@@ -39,6 +43,8 @@ export class User {
     notifications: Notification[] = []
   ) {
     this.id = id;
+    this.countryCode = countryCode;
+    this.contact = contact;
     this.name = name;
     this.email = email;
     this.password = password;

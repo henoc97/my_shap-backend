@@ -7,6 +7,7 @@ import { FindUserByEmailUseCase } from "../../use-cases/user.use-cases/find-user
 import { FindActiveUsersUseCase } from "../../use-cases/user.use-cases/find-active-users.use-case";
 import TYPES from "../types/types";
 import { Container } from "inversify";
+import { IsUserByContactUseCase } from "../../use-cases/user.use-cases/is-user-by-contact.use-case";
 
 
 function bindUserUseCase(container: Container) {
@@ -17,6 +18,7 @@ function bindUserUseCase(container: Container) {
         container.bind<GetUserByIdUseCase>(TYPES.GetUserByIdUseCase).to(GetUserByIdUseCase);
         container.bind<UpdateUserUseCase>(TYPES.UpdateUserUseCase).to(UpdateUserUseCase);
         container.bind<FindUserByEmailUseCase>(TYPES.FindUserByEmailUseCase).to(FindUserByEmailUseCase);
+        container.bind<IsUserByContactUseCase>(TYPES.IsUserByContactUseCase).to(IsUserByContactUseCase);
         container.bind<FindActiveUsersUseCase>(TYPES.FindActiveUsersUseCase).to(FindActiveUsersUseCase);
 
     } catch (error) {

@@ -3,9 +3,10 @@ import { TransferController } from '../controllers/transfer.controller';
 import { DIContainer } from '../../application/containers/container-inversify/container';
 import { TransferDTO } from '../dtos/transfer.dto';
 import { validateDto } from '../../application/helper/middlewares/validate-dto.middleware';
+import TYPES from '../../application/containers/types/types';
 
 const transferRouter = Router();
-const transferController = DIContainer.getContainer().get(TransferController);
+const transferController = DIContainer.getContainer().get<TransferController>(TYPES.TransferController);
 
 transferRouter.use(validateDto(TransferDTO));
 

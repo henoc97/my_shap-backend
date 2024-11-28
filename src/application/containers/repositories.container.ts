@@ -23,7 +23,7 @@ function bindIRepo(container: Container) {
     container.bind<IAgentRepository>("IAgentRepository").to(AgentRepositoryImpl).inSingletonScope();
     container.bind<IFeeRepository>("IFeeRepository").to(FeeRepositoryImpl).inSingletonScope();
     container.bind<ITransactionRepository>("ITransactionRepository").to(TransactionRepositoryImpl).inSingletonScope();
-    container.bind<ITransferRepository>("ITransferRepository").to(TransferRepositoryImpl).inSingletonScope();
+    container.bind<ITransferRepository>(TYPES.ITransferRepository).to(TransferRepositoryImpl).inSingletonScope();
     container.bind<INotificationRepository>("INotificationRepository").to(NotificationRepositoryImpl).inSingletonScope();
     container.bind<IAdminRepository>("IAdminRepository").to(AdminRepositoryImpl).inSingletonScope();
 }

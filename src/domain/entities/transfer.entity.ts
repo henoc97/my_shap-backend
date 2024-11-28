@@ -8,6 +8,8 @@ export class Transfer {
   id: number;
   amount: number;
   senderId: number;
+  contact?: string;
+  countryCode: string = "228";
   receiverId?: number;
   agentId?: number;
   feeId?: number;
@@ -29,6 +31,8 @@ export class Transfer {
     senderId: number,
     receiverId?: number,
     agentId?: number,
+    contact?: string,
+    countryCode?: string,
     feeId?: number,
     expiresAt?: Date,
     status: TransferStatus = TransferStatus.PENDING,
@@ -44,6 +48,8 @@ export class Transfer {
     this.amount = amount;
     this.senderId = senderId;
     this.sender = sender;
+    this.contact = contact ?? "";
+    this.countryCode = countryCode ?? "228";
     this.receiverId = receiverId;
     this.receiver = receiver;
     this.agentId = agentId;

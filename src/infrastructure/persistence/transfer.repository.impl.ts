@@ -7,6 +7,7 @@ import { injectable } from 'inversify';
 
 @injectable()
 export class TransferRepositoryImpl implements ITransferRepository {
+
   async create(transfer: Transfer): Promise<Transfer> {
     try {
       const { id, sender, receiver, agent, fee, transaction, ...transferData } = transfer;
@@ -85,6 +86,18 @@ export class TransferRepositoryImpl implements ITransferRepository {
       return result.map(toTransferEntity);
     } catch (error) {
       console.error('Error finding transfers by receiver ID:', error);
+      throw error;
+    }
+  }
+
+  async getByCode(code: string): Promise<Transfer | null> {
+    try {
+      const result = await prisma.transfer.findUnique({
+        where: { code: code }
+      });
+      return result ? toTransferEntity(result) : null;
+    } catch (error) {
+      console.error('Error getting transfer by code:', error);
       throw error;
     }
   }

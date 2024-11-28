@@ -17,7 +17,7 @@ function bindControllers(container: Container) {
     container.bind<UserController>(TYPES.UserController).to(UserController);
     container.bind<TransactionController>(TransactionController).toSelf();
     container.bind<NotificationController>(NotificationController).toSelf();
-    container.bind<TransferController>(TransferController).toSelf();
+    container.bind<TransferController>(TYPES.TransferController).to(TransferController);
     container.bind<FeeController>(FeeController).toSelf();
 }
 

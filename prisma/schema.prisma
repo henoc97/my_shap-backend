@@ -18,6 +18,8 @@ model User {
   email             String?    @unique // Email is optional and unique for users with an account
   name              String     // User's full name
   password          String?    // Optional password for users with accounts
+  contact           String     @unique
+  countryCode       String     @default("228")
   balance           Float      @default(0.0) // Current balance of the user
   role              Role       @default(USER) // Defines the user's role (USER, ADMIN, or AGENT)
   isActive          Boolean    @default(true) // Indicates whether the user account is active
@@ -29,21 +31,24 @@ model User {
   notifications     Notification[] // Notifications for the user
   createdAt         DateTime   @default(now()) // When the user account was created
   updatedAt         DateTime   @updatedAt // Automatically updated when the user record is modified
+  @@unique([contact, countryCode])
 }
 
 model Transfer {
   id                Int        @id @default(autoincrement()) // Unique identifier for the transfer
   amount            Float      // Amount being transferred
   senderId          Int        // Reference to the sender of the transfer (User)
-  receiverId        Int?       // Can be null if the receiver is not a user of the app
+  // receiverId        Int?       // Can be null if the receiver is not a user of the app
   agentId           Int?       // Optional reference to the agent handling the transfer
   feeId             Int?       @unique  // Optional link to a fee model if applicable
-  code              String?    // Withdrawal code generated for non-app receivers
+  code              String?     @unique // Withdrawal code generated for non-app receivers
+  contact           String?    // Withdrawal phone generated for non-app receivers
+  countryCode       String     @default("228")
   transaction       Transaction?
   createdAt         DateTime   @default(now()) // When the transfer was initiated
   expiresAt         DateTime?  // Expiration date of the withdrawal code if unused
   sender            User       @relation("SentTransfers", fields: [senderId], references: [id]) // Sender relationship
-  receiver          User?      @relation("ReceivedTransfers", fields: [receiverId], references: [id]) // Receiver relationship
+  receiver          User?      @relation("ReceivedTransfers", fields: [contact, countryCode], references: [contact, countryCode]) // Receiver relationship
   agent             Agent?     @relation(fields: [agentId], references: [id]) // Agent relationship
   fee               Fee?       @relation(fields: [feeId], references: [id]) // Fee relationship
   status            TransferStatus @default(PENDING) // Current status of the transfer

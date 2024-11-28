@@ -31,7 +31,19 @@ export class UserService {
         return this.userRepository.findByEmail(email);
     }
 
+    async findUserByContact(countryCode: string, contact: string): Promise<User | null> {
+        return this.userRepository.findByContact(countryCode, contact);
+    }
+
+    async isUserByContact(countryCode: string, contact: string): Promise<boolean> {
+        return this.userRepository.isUserByContact(countryCode, contact);
+    }
+
     async findActiveUsers(): Promise<User[]> {
         return this.userRepository.findActiveUsers();
+    }
+
+    async findUserContact(id: number): Promise<{ countryCode: string | undefined; contact: string | undefined }> {
+        return this.userRepository.findUserContact(id);
     }
 }
