@@ -26,6 +26,32 @@ const TYPES = {
     FindTransfersBySenderIdUseCase: Symbol.for("FindTransfersBySenderIdUseCase"),
     UpdateTransferUseCase: Symbol.for("UpdateTransferUseCase"),
     DeleteTransferUseCase: Symbol.for("DeleteTransferUseCase"),
+
+    // Transaction
+    ITransactionRepository: Symbol.for("ITransactionRepository"),
+    TransactionRepository: Symbol.for("TransactionRepository"),
+    TransactionService: Symbol.for("TransactionService"),
+    TransactionController: Symbol.for("TransactionController"),
+    CreateTransactionUseCase: Symbol.for("CreateTransactionUseCase"),
+    DeleteTransactionUseCase: Symbol.for("DeleteTransactionUseCase"),
+    GetAllTransactionsUseCase: Symbol.for("GetAllTransactionsUseCase"),
+    GetTransactionByIdUseCase: Symbol.for("GetTransactionByIdUseCase"),
+    UpdateTransactionUseCase: Symbol.for("UpdateTransactionUseCase"),
+    FindTransactionsByUserIdUseCase: Symbol.for("FindTransactionsByUserIdUseCase"),
+    FindTransactionsByTypeUseCase: Symbol.for("FindTransactionsByTypeUseCase"),
+
+    // Notification
+    INotificatioRepository: Symbol.for("INotificatioRepository"),
+    NotificatioRepository: Symbol.for("NotificatioRepository"),
+    NotificatioService: Symbol.for("NotificatioService"),
+    NotificatioController: Symbol.for("NotificatioController"),
+    CreateNotificationUseCase: Symbol.for("CreateNotificationUseCase"),
+    DeleteNotificationUseCase: Symbol.for("DeleteNotificationUseCase"),
+    GetAllNotificationsUseCase: Symbol.for("GetAllNotificationsUseCase"),
+    GetNotificationByIdUseCase: Symbol.for("GetNotificationByIdUseCase"),
+    UpdateNotificationUseCase: Symbol.for("UpdateNotificationUseCase"),
+    FindNotificationsByUserIdUseCase: Symbol.for("FindNotificationsByUserIdUseCase"),
+    MarkNotificationAsReadUseCase: Symbol.for("MarkNotificationAsReadUseCase"),
 };
 
 export default TYPES;

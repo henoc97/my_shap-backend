@@ -7,6 +7,9 @@ import { injectable } from 'inversify';
 
 @injectable()
 export class TransferRepositoryImpl implements ITransferRepository {
+  findByReceiverId(receiverId: number): Promise<Transfer[]> {
+    throw new Error('Method not implemented.');
+  }
 
   async create(transfer: Transfer): Promise<Transfer> {
     try {
@@ -80,15 +83,15 @@ export class TransferRepositoryImpl implements ITransferRepository {
     }
   }
 
-  async findByReceiverId(receiverId: number): Promise<Transfer[]> {
-    try {
-      const result = await prisma.transfer.findMany({ where: { receiverId } });
-      return result.map(toTransferEntity);
-    } catch (error) {
-      console.error('Error finding transfers by receiver ID:', error);
-      throw error;
-    }
-  }
+  // async findByReceiverId(receiverId: number): Promise<Transfer[]> {
+  //   try {
+  //     const result = await prisma.transfer.findMany({ where: { receiverId } });
+  //     return result.map(toTransferEntity);
+  //   } catch (error) {
+  //     console.error('Error finding transfers by receiver ID:', error);
+  //     throw error;
+  //   }
+  // }
 
   async getByCode(code: string): Promise<Transfer | null> {
     try {

@@ -6,17 +6,18 @@ import { UpdateNotificationUseCase } from "../../use-cases/notification.use-case
 import { FindNotificationsByUserIdUseCase } from "../../use-cases/notification.use-cases/find-notifications-by-user-id.use-case";
 import { MarkNotificationAsReadUseCase } from "../../use-cases/notification.use-cases/mark-notification-as-read.use-case";
 import { Container } from "inversify";
+import TYPES from "../types/types";
 
 
 function bindNotificationUseCase(container: Container) {
 
-    container.bind<CreateNotificationUseCase>(CreateNotificationUseCase).toSelf();
-    container.bind<DeleteNotificationUseCase>(DeleteNotificationUseCase).toSelf();
-    container.bind<GetAllNotificationsUseCase>(GetAllNotificationsUseCase).toSelf();
-    container.bind<GetNotificationByIdUseCase>(GetNotificationByIdUseCase).toSelf();
-    container.bind<UpdateNotificationUseCase>(UpdateNotificationUseCase).toSelf();
-    container.bind<FindNotificationsByUserIdUseCase>(FindNotificationsByUserIdUseCase).toSelf();
-    container.bind<MarkNotificationAsReadUseCase>(MarkNotificationAsReadUseCase).toSelf();
+    container.bind<CreateNotificationUseCase>(TYPES.CreateNotificationUseCase).to(CreateNotificationUseCase);
+    container.bind<DeleteNotificationUseCase>(TYPES.DeleteNotificationUseCase).to(DeleteNotificationUseCase);
+    container.bind<GetAllNotificationsUseCase>(TYPES.GetAllNotificationsUseCase).to(GetAllNotificationsUseCase);
+    container.bind<GetNotificationByIdUseCase>(TYPES.GetNotificationByIdUseCase).to(GetNotificationByIdUseCase);
+    container.bind<UpdateNotificationUseCase>(TYPES.UpdateNotificationUseCase).to(UpdateNotificationUseCase);
+    container.bind<FindNotificationsByUserIdUseCase>(TYPES.FindNotificationsByUserIdUseCase).to(FindNotificationsByUserIdUseCase);
+    container.bind<MarkNotificationAsReadUseCase>(TYPES.MarkNotificationAsReadUseCase).to(MarkNotificationAsReadUseCase);
 }
 
 export default bindNotificationUseCase;

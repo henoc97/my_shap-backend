@@ -8,8 +8,8 @@ export function toUserEntity(dto: UserDTO): User {
         dto.contact,
         dto.name,
         dto.email,
-        "",
-        dto.countryCode,
+        dto.password,
+        `${dto.countryCode.toString()}`,
         dto.balance,
         dto.role,
         dto.isActive

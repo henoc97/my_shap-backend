@@ -1,5 +1,6 @@
 import { UserDTO } from "../../../presentation/dtos/user.dto";
 import TYPES from "../../containers/types/types";
+import { hashPassword } from "../../helper/functions/hash-compare-pwd";
 import { toUserEntity } from "../../helper/to.entity/user.to.entity";
 import { UserService } from "../../services/user.service";
 import { inject, injectable } from "inversify";
@@ -15,6 +16,7 @@ export class CreateUserUseCase {
      */
     async execute(userDto: UserDTO) {
         const user = toUserEntity(userDto);
+        user.password = await hashPassword(user.password!);
         return this.userService.createUser(user);
     }
 }

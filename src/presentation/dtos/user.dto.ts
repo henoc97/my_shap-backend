@@ -10,6 +10,10 @@ export class UserDTO {
     @IsOptional()
     email?: string;
 
+    @IsString()
+    @IsOptional()
+    password?: string;
+
     @IsOptional()
     @IsString()
     name: string;
@@ -35,7 +39,7 @@ export class UserDTO {
     isActive: boolean;
 
     @IsOptional()
-    @IsString()
+    @IsNumber()
     otp?: number;
 
     @IsOptional()
@@ -49,6 +53,7 @@ export class UserDTO {
     constructor(
         id: number,
         name: string,
+        password: string,
         email: string | undefined,
         contact: string,
         countryCode: string,
@@ -61,10 +66,11 @@ export class UserDTO {
     ) {
         this.id = id;
         this.name = name;
+        this.password = password;
         this.email = email;
         this.contact = contact;
         this.otp = otp;
-        this.countryCode = countryCode;
+        this.countryCode = countryCode?.toString();
         this.balance = balance;
         this.role = role;
         this.isActive = isActive;

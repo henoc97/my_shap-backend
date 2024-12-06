@@ -8,6 +8,8 @@ export function toTransferEntity(dto: any): Transfer {
         dto.senderId,
         dto.receiverId,
         dto.agentId,
+        dto.contact,
+        dto.countryCode,
         dto.feeId,
         dto.expiresAt,
         dto.status,
