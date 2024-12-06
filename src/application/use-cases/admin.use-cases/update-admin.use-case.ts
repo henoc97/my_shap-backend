@@ -1,10 +1,11 @@
+import { injectable, inject } from "inversify";
 import { AdminService } from "../../services/admin.service";
 import { Admin } from "../../../domain/entities/admin.entity";
-import { injectable } from "inversify";
+import TYPES from "../../containers/types/types";
 
 @injectable()
 export class UpdateAdminUseCase {
-    constructor(private adminService: AdminService) {}
+    constructor(@inject(TYPES.AdminService) private adminService: AdminService) { }
 
     /**
      * Executes the use case to update an admin.

@@ -5,15 +5,16 @@ import { FindFeeByTransactionIdUseCase } from '../../application/use-cases/fee.u
 import { GetFeeByIdUseCase } from '../../application/use-cases/fee.use-cases/get-fee-by-id.use-case';
 import { UpdateFeeUseCase } from '../../application/use-cases/fee.use-cases/update-fee.use-case';
 import { inject, injectable } from 'inversify';
+import TYPES from '../../application/containers/types/types';
 
 @injectable()
 export class FeeController {
     constructor(
-        @inject(CreateFeeUseCase) private createFeeUseCase: CreateFeeUseCase,
-        @inject(DeleteFeeUseCase) private deleteFeeUseCase: DeleteFeeUseCase,
-        @inject(FindFeeByTransactionIdUseCase) private findFeeByTransactionIdUseCase: FindFeeByTransactionIdUseCase,
-        @inject(GetFeeByIdUseCase) private getFeeByIdUseCase: GetFeeByIdUseCase,
-        @inject(UpdateFeeUseCase) private updateFeeUseCase: UpdateFeeUseCase
+        @inject(TYPES.CreateFeeUseCase) private createFeeUseCase: CreateFeeUseCase,
+        @inject(TYPES.DeleteFeeUseCase) private deleteFeeUseCase: DeleteFeeUseCase,
+        @inject(TYPES.FindFeeByTransactionIdUseCase) private findFeeByTransactionIdUseCase: FindFeeByTransactionIdUseCase,
+        @inject(TYPES.GetFeeByIdUseCase) private getFeeByIdUseCase: GetFeeByIdUseCase,
+        @inject(TYPES.UpdateFeeUseCase) private updateFeeUseCase: UpdateFeeUseCase
     ) { }
 
     public async createFee(req: Request, res: Response): Promise<void> {

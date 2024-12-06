@@ -5,18 +5,19 @@ import { GetAdminByIdUseCase } from "../../use-cases/admin.use-cases/get-admin-b
 import { UpdateAdminUseCase } from "../../use-cases/admin.use-cases/update-admin.use-case";
 import { FindAdminByUserIdUseCase } from "../../use-cases/admin.use-cases/find-admin-by-user-id.use-case";
 import { Container } from "inversify";
+import TYPES from "../types/types";
 
 
 
 
 function bindAdminUseCase(container: Container) {
 
-    container.bind<CreateAdminUseCase>(CreateAdminUseCase).toSelf();
-    container.bind<DeleteAdminUseCase>(DeleteAdminUseCase).toSelf();
-    container.bind<GetAllAdminsUseCase>(GetAllAdminsUseCase).toSelf();
-    container.bind<GetAdminByIdUseCase>(GetAdminByIdUseCase).toSelf();
-    container.bind<UpdateAdminUseCase>(UpdateAdminUseCase).toSelf();
-    container.bind<FindAdminByUserIdUseCase>(FindAdminByUserIdUseCase).toSelf();
+    container.bind<CreateAdminUseCase>(TYPES.CreateAdminUseCase).to(CreateAdminUseCase);
+    container.bind<DeleteAdminUseCase>(TYPES.DeleteAdminUseCase).to(DeleteAdminUseCase);
+    container.bind<GetAllAdminsUseCase>(TYPES.GetAllAdminsUseCase).to(GetAllAdminsUseCase);
+    container.bind<GetAdminByIdUseCase>(TYPES.GetAdminByIdUseCase).to(GetAdminByIdUseCase);
+    container.bind<UpdateAdminUseCase>(TYPES.UpdateAdminUseCase).to(UpdateAdminUseCase);
+    container.bind<FindAdminByUserIdUseCase>(TYPES.FindAdminByUserIdUseCase).to(FindAdminByUserIdUseCase);
 }
 
 export default bindAdminUseCase;

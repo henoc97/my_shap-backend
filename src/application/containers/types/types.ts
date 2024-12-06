@@ -41,10 +41,10 @@ const TYPES = {
     FindTransactionsByTypeUseCase: Symbol.for("FindTransactionsByTypeUseCase"),
 
     // Notification
-    INotificatioRepository: Symbol.for("INotificatioRepository"),
-    NotificatioRepository: Symbol.for("NotificatioRepository"),
-    NotificatioService: Symbol.for("NotificatioService"),
-    NotificatioController: Symbol.for("NotificatioController"),
+    INotificationRepository: Symbol.for("INotificationRepository"),
+    NotificationRepository: Symbol.for("NotificationRepository"),
+    NotificationService: Symbol.for("NotificationService"),
+    NotificationController: Symbol.for("NotificationController"),
     CreateNotificationUseCase: Symbol.for("CreateNotificationUseCase"),
     DeleteNotificationUseCase: Symbol.for("DeleteNotificationUseCase"),
     GetAllNotificationsUseCase: Symbol.for("GetAllNotificationsUseCase"),
@@ -52,6 +52,42 @@ const TYPES = {
     UpdateNotificationUseCase: Symbol.for("UpdateNotificationUseCase"),
     FindNotificationsByUserIdUseCase: Symbol.for("FindNotificationsByUserIdUseCase"),
     MarkNotificationAsReadUseCase: Symbol.for("MarkNotificationAsReadUseCase"),
+
+    // Admin
+    IAdminRepository: Symbol.for("IAdminRepository"),
+    AdminRepository: Symbol.for("AdminRepository"),
+    AdminService: Symbol.for("AdminService"),
+    AdminController: Symbol.for("AdminController"),
+    CreateAdminUseCase: Symbol.for("CreateAdminUseCase"),
+    DeleteAdminUseCase: Symbol.for("DeleteAdminUseCase"),
+    GetAllAdminsUseCase: Symbol.for("GetAllAdminsUseCase"),
+    GetAdminByIdUseCase: Symbol.for("GetAdminByIdUseCase"),
+    UpdateAdminUseCase: Symbol.for("UpdateAdminUseCase"),
+    FindAdminByUserIdUseCase: Symbol.for("FindAdminByUserIdUseCase"),
+
+    // Fee
+    IFeeRepository: Symbol.for("IFeeRepository"),
+    FeeRepository: Symbol.for("FeeRepository"),
+    FeeService: Symbol.for("FeeService"),
+    FeeController: Symbol.for("FeeController"),
+    CreateFeeUseCase: Symbol.for("CreateFeeUseCase"),
+    DeleteFeeUseCase: Symbol.for("DeleteFeeUseCase"),
+    GetFeeByIdUseCase: Symbol.for("GetFeeByIdUseCase"),
+    UpdateFeeUseCase: Symbol.for("UpdateFeeUseCase"),
+    FindFeeByTransactionIdUseCase: Symbol.for("FindFeeByTransactionIdUseCase"),
+
+    // Agent
+    IAgentRepository: Symbol.for("IAgentRepository"),
+    AgentRepository: Symbol.for("AgentRepository"),
+    AgentService: Symbol.for("AgentService"),
+    AgentController: Symbol.for("AgentController"),
+    CreateAgentUseCase: Symbol.for("CreateAgentUseCase"),
+    DeleteAgentUseCase: Symbol.for("DeleteAgentUseCase"),
+    GetAllAgentsUseCase: Symbol.for("GetAllAgentsUseCase"),
+    GetAgentByIdUseCase: Symbol.for("GetAgentByIdUseCase"),
+    UpdateAgentUseCase: Symbol.for("UpdateAgentUseCase"),
+    FindAgentByUserIdUseCase: Symbol.for("FindAgentByUserIdUseCase"),
+    FindAgentsWithTransfersUseCase: Symbol.for("FindAgentsWithTransfersUseCase"),
 };
 
 export default TYPES;

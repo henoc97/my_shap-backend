@@ -7,18 +7,19 @@ import { UpdateNotificationUseCase } from '../../application/use-cases/notificat
 import { FindNotificationsByUserIdUseCase } from '../../application/use-cases/notification.use-cases/find-notifications-by-user-id.use-case';
 import { MarkNotificationAsReadUseCase } from '../../application/use-cases/notification.use-cases/mark-notification-as-read.use-case';
 import { inject, injectable } from 'inversify';
+import TYPES from '../../application/containers/types/types';
 
 @injectable()
 export class NotificationController {
     constructor(
-        @inject(CreateNotificationUseCase) private createNotificationUseCase: CreateNotificationUseCase,
-        @inject(GetAllNotificationsUseCase) private getAllNotificationsUseCase: GetAllNotificationsUseCase,
-        @inject(GetNotificationByIdUseCase) private getNotificationByIdUseCase: GetNotificationByIdUseCase,
-        @inject(DeleteNotificationUseCase) private deleteNotificationUseCase: DeleteNotificationUseCase,
-        @inject(UpdateNotificationUseCase) private updateNotificationUseCase: UpdateNotificationUseCase,
-        @inject(FindNotificationsByUserIdUseCase) private findNotificationsByUserIdUseCase: FindNotificationsByUserIdUseCase,
-        @inject(MarkNotificationAsReadUseCase) private markNotificationAsReadUseCase: MarkNotificationAsReadUseCase
-    ) {}
+        @inject(TYPES.CreateNotificationUseCase) private createNotificationUseCase: CreateNotificationUseCase,
+        @inject(TYPES.GetAllNotificationsUseCase) private getAllNotificationsUseCase: GetAllNotificationsUseCase,
+        @inject(TYPES.GetNotificationByIdUseCase) private getNotificationByIdUseCase: GetNotificationByIdUseCase,
+        @inject(TYPES.DeleteNotificationUseCase) private deleteNotificationUseCase: DeleteNotificationUseCase,
+        @inject(TYPES.UpdateNotificationUseCase) private updateNotificationUseCase: UpdateNotificationUseCase,
+        @inject(TYPES.FindNotificationsByUserIdUseCase) private findNotificationsByUserIdUseCase: FindNotificationsByUserIdUseCase,
+        @inject(TYPES.MarkNotificationAsReadUseCase) private markNotificationAsReadUseCase: MarkNotificationAsReadUseCase
+    ) { }
 
     public async createNotification(req: Request, res: Response): Promise<void> {
         try {

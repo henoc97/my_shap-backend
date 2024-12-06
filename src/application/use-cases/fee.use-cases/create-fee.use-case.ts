@@ -1,10 +1,11 @@
 import { FeeService } from "../../services/fee.service";
 import { FeeDTO } from "../../../presentation/dtos/fee.dto";
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
+import TYPES from "../../containers/types/types";
 
 @injectable()
 export class CreateFeeUseCase {
-    constructor(private feeService: FeeService) {}
+    constructor(@inject(TYPES.FeeService) private feeService: FeeService) { }
 
     /**
      * Executes the use case to create a new fee.
@@ -13,5 +14,5 @@ export class CreateFeeUseCase {
      */
     async execute(feeDto: FeeDTO) {
         return this.feeService.createFee(feeDto);
-    }   
+    }
 }

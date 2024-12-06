@@ -1,9 +1,10 @@
 import { FeeService } from "../../services/fee.service";
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
+import TYPES from "../../containers/types/types";
 
 @injectable()
 export class GetFeeByIdUseCase {
-    constructor(private feeService: FeeService) {}
+    constructor(@inject(TYPES.FeeService) private feeService: FeeService) { }
 
     /**
      * Executes the use case to retrieve a fee by ID.

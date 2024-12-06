@@ -8,18 +8,19 @@ import { DeleteTransactionUseCase } from '../../application/use-cases/transactio
 import { inject, injectable } from 'inversify';
 import { FindTransactionsByTypeUseCase } from '../../application/use-cases/transaction.use-cases/find-transactions-by-type.use-case';
 import { TransactionType } from '../../domain/enums/transaction-type.enum';
+import TYPES from '../../application/containers/types/types';
 
 @injectable()
 export class TransactionController {
     constructor(
-        @inject(CreateTransactionUseCase) private createTransactionUseCase: CreateTransactionUseCase,
-        @inject(GetTransactionByIdUseCase) private getTransactionByIdUseCase: GetTransactionByIdUseCase,
-        @inject(GetAllTransactionsUseCase) private getAllTransactionsUseCase: GetAllTransactionsUseCase,
-        @inject(FindTransactionsByUserIdUseCase) private findTransactionsByUserIdUseCase: FindTransactionsByUserIdUseCase,
-        @inject(FindTransactionsByTypeUseCase) private findTransactionsByTypeUseCase: FindTransactionsByTypeUseCase,
-        @inject(UpdateTransactionUseCase) private updateTransactionUseCase: UpdateTransactionUseCase,
-        @inject(DeleteTransactionUseCase) private deleteTransactionUseCase: DeleteTransactionUseCase
-    ) {}
+        @inject(TYPES.CreateTransactionUseCase) private createTransactionUseCase: CreateTransactionUseCase,
+        @inject(TYPES.GetTransactionByIdUseCase) private getTransactionByIdUseCase: GetTransactionByIdUseCase,
+        @inject(TYPES.GetAllTransactionsUseCase) private getAllTransactionsUseCase: GetAllTransactionsUseCase,
+        @inject(TYPES.FindTransactionsByUserIdUseCase) private findTransactionsByUserIdUseCase: FindTransactionsByUserIdUseCase,
+        @inject(TYPES.FindTransactionsByTypeUseCase) private findTransactionsByTypeUseCase: FindTransactionsByTypeUseCase,
+        @inject(TYPES.UpdateTransactionUseCase) private updateTransactionUseCase: UpdateTransactionUseCase,
+        @inject(TYPES.DeleteTransactionUseCase) private deleteTransactionUseCase: DeleteTransactionUseCase
+    ) { }
 
     public async createTransaction(req: Request, res: Response): Promise<void> {
         try {

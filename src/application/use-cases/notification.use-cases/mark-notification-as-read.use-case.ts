@@ -1,9 +1,10 @@
 import { NotificationService } from "../../services/notification.service";
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
+import TYPES from "../../containers/types/types";
 
 @injectable()
 export class MarkNotificationAsReadUseCase {
-    constructor(private notificationService: NotificationService) {}
+    constructor(@inject(TYPES.NotificationService) private notificationService: NotificationService) { }
 
     /**
      * Executes the use case to mark a notification as read.

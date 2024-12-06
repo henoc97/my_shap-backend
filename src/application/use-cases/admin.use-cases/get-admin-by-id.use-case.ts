@@ -1,9 +1,10 @@
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
 import { AdminService } from "../../services/admin.service";
+import TYPES from "../../containers/types/types";
 
 @injectable()
 export class GetAdminByIdUseCase {
-    constructor(private adminService: AdminService) {}
+    constructor(@inject(TYPES.AdminService) private adminService: AdminService) { }
 
     /**
      * Executes the use case to retrieve an admin by ID.

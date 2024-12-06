@@ -1,10 +1,11 @@
+import { injectable, inject } from "inversify";
 import { AgentService } from "../../services/agent.service";
 import { Agent } from "../../../domain/entities/agent.entity";
-import { injectable } from "inversify";
+import TYPES from "../../containers/types/types";
 
 @injectable()
 export class UpdateAgentUseCase {
-    constructor(private agentService: AgentService) {}
+    constructor(@inject(TYPES.AgentService) private agentService: AgentService) { }
 
     /**
      * Executes the use case to update an agent.

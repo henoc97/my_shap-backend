@@ -12,13 +12,13 @@ import { Container } from "inversify";
 function bindControllers(container: Container) {
 
     // Enregistrement des contrôleurs dans le conteneur
-    container.bind<AgentController>(AgentController).toSelf();
-    container.bind<AdminController>(AdminController).toSelf();
+    container.bind<AgentController>(TYPES.AgentController).to(AgentController);
+    container.bind<AdminController>(TYPES.AdminController).to(AdminController);
     container.bind<UserController>(TYPES.UserController).to(UserController);
-    container.bind<TransactionController>(TransactionController).toSelf();
-    container.bind<NotificationController>(NotificationController).toSelf();
+    container.bind<TransactionController>(TYPES.TransactionController).to(TransactionController);
+    container.bind<NotificationController>(TYPES.NotificationController).to(NotificationController);
     container.bind<TransferController>(TYPES.TransferController).to(TransferController);
-    container.bind<FeeController>(FeeController).toSelf();
+    container.bind<FeeController>(TYPES.FeeController).to(FeeController);
 }
 
 export default bindControllers;

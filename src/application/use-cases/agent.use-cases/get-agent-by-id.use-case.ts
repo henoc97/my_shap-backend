@@ -1,9 +1,10 @@
+import { injectable, inject } from "inversify";
 import { AgentService } from "../../services/agent.service";
-import { injectable } from "inversify";
+import TYPES from "../../containers/types/types";
 
 @injectable()
 export class GetAgentByIdUseCase {
-    constructor(private agentService: AgentService) {}
+    constructor(@inject(TYPES.AgentService) private agentService: AgentService) { }
 
     /**
      * Executes the use case to retrieve an agent by ID.

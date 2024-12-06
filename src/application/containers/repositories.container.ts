@@ -20,12 +20,12 @@ import TYPES from "./types/types";
 function bindIRepo(container: Container) {
 
     container.bind<IUserRepository>(TYPES.IUserRepository).to(UserRepositoryImpl).inSingletonScope();
-    container.bind<IAgentRepository>("IAgentRepository").to(AgentRepositoryImpl).inSingletonScope();
-    container.bind<IFeeRepository>("IFeeRepository").to(FeeRepositoryImpl).inSingletonScope();
-    container.bind<ITransactionRepository>("ITransactionRepository").to(TransactionRepositoryImpl).inSingletonScope();
+    container.bind<IAgentRepository>(TYPES.IAgentRepository).to(AgentRepositoryImpl).inSingletonScope();
+    container.bind<IFeeRepository>(TYPES.IFeeRepository).to(FeeRepositoryImpl).inSingletonScope();
+    container.bind<ITransactionRepository>(TYPES.ITransactionRepository).to(TransactionRepositoryImpl).inSingletonScope();
     container.bind<ITransferRepository>(TYPES.ITransferRepository).to(TransferRepositoryImpl).inSingletonScope();
-    container.bind<INotificationRepository>("INotificationRepository").to(NotificationRepositoryImpl).inSingletonScope();
-    container.bind<IAdminRepository>("IAdminRepository").to(AdminRepositoryImpl).inSingletonScope();
+    container.bind<INotificationRepository>(TYPES.INotificationRepository).to(NotificationRepositoryImpl).inSingletonScope();
+    container.bind<IAdminRepository>(TYPES.IAdminRepository).to(AdminRepositoryImpl).inSingletonScope();
 }
 
 export default bindIRepo;

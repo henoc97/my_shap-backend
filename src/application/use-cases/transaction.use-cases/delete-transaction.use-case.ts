@@ -1,9 +1,10 @@
 import { TransactionService } from "../../services/transaction.service";
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
+import TYPES from "../../containers/types/types";
 
 @injectable()
 export class DeleteTransactionUseCase {
-    constructor(private transactionService: TransactionService) {}
+    constructor(@inject(TYPES.TransactionService) private transactionService: TransactionService) { }
 
     /**
      * Executes the use case to delete a transaction.
